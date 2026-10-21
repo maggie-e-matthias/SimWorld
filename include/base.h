@@ -1,3 +1,5 @@
+#pragma once
+
 #include <iostream>
 #include <string>
 using namespace std;
@@ -31,7 +33,6 @@ class simEntity{ // Abstract base class
         void virtual getAction() const = 0;
 };
 
-int simEntity::count = 0;
 
 // Living Entities base Class 
 class living: public simEntity{ // Abstract base class

@@ -1,9 +1,10 @@
+#pragma once
+
 #include <iostream> 
 #include <string>
 #include "base.h"
-#include "animals.h"
-#include "builds.h"
 using namespace std;
+
 
 // Survivor Class (Base class provides generic survivor that has no special skills)
 class survivor: public living{
@@ -16,6 +17,8 @@ class survivor: public living{
 
         int getXPLevel() const;
         void setXPLevel(int);
+
+        void getAction() const override;
 };
 
 // Special survivors classes
@@ -49,8 +52,8 @@ class engineer: public survivor{
         engineer(engineer &c);
         virtual ~engineer();
 
-        void build(builds &b);
-        void repair(builds &b);
+        void build();
+        void repair();
 };
 
 // Farmer survivor (has the skill to breed animals and grow crops)
@@ -60,8 +63,8 @@ class farmer: public survivor{
         farmer(farmer &c);
         virtual ~farmer();
 
-        void breed(animal &a);
-        void growCrops(farm &f);
+        void breed();
+        void growCrops();
 };
 
 // Hunter survivor (has the skill to go on hunting trips and fend off enemies)
@@ -71,6 +74,6 @@ class hunter: public survivor{
         hunter(hunter &c);
         virtual ~hunter();
 
-        void hunt(animal &a);
+        void hunt();
         void fendOff();
 }; 
