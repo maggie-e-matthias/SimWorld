@@ -1,5 +1,6 @@
 #include <iostream> 
-
+#include <string>
+using namespace std;
 // ------ Survivor Island ------
 // (Where you either make it back to civilization or die trying)
 
@@ -27,11 +28,11 @@ class simEntity{ // Abstract base class
         virtual ~simEntity();
 
         int getID();
-        string* getName();
+        string* getName() const;
         void setName(string);
-        bool getisActive();
+        bool getisActive() const;
         void setActive(bool);
-        int getDaysLasted();
+        int getDaysLasted() const;
 
         void howLongDidItLast();
         void virtual getAction() const = 0;
@@ -40,16 +41,34 @@ class simEntity{ // Abstract base class
 int simEntity::count = 0;
 
 // Living Entities base Class 
-class living: public simEntity{
+class living: public simEntity{ // Abstract base class
     private:
         int healthLevel;
+        const int maxHealthLevel;
         bool isSick; 
+    public: 
+        living();
+        living(living &c);
+        virtual ~living();
+
+        int getHealthLevel() const;
+        void setHealthLevel(int);
+        bool getIsSick() const;
+        void setIsSick(bool);
+        int getMaxHealthLevel() const;
 };
 
 // Survivor Class (Base class provides generic survivor that has no special skills)
 class survivor: public living{
     private: 
-        int xpLevel;
+        int XPLevel;
+    public:
+        survivor();
+        survivor(survivor &c);
+        virtual ~survivor();
+
+        int getXPLevel() const;
+        void setXPLevel(int);
 };
 
 // Special survivors classes
@@ -57,19 +76,32 @@ class survivor: public living{
 // Doctor survivor (has the skill to make meds and heal other survivors)
 class doctor: public survivor{
     public: 
+        doctor();
+        doctor(doctor &c);
+        virtual ~doctor();
+
         void heal(survivor &s);
         void makeMeds();
+
 };
 
 // Scout survivor (has the skill to bring more resources than others)
 class scout: public survivor{
     public: 
+        scout();
+        scout(scout &c);
+        virtual ~scout();
+
         void gatherResources();
 };
 
 // Engineer survivor (has the skill to build utilies and repair them)
 class engineer: public survivor{
     public: 
+        engineer();
+        engineer(engineer &c);
+        virtual ~engineer();
+
         void build(builds &b);
         void repair(builds &b);
 };
@@ -77,6 +109,10 @@ class engineer: public survivor{
 // Farmer survivor (has the skill to breed animals and grow crops)
 class farmer: public survivor{
     public: 
+        farmer();
+        farmer(farmer &c);
+        virtual ~farmer();
+
         void breed(animal &a);
         void growCrops(farm &f);
 };
@@ -84,6 +120,10 @@ class farmer: public survivor{
 // Hunter survivor (has the skill to go on hunting trips and fend off enemies)
 class hunter: public survivor{
     public: 
+        hunter();
+        hunter(hunter &c);
+        virtual ~hunter();
+
         void hunt(animal &a);
         void fendOff();
 }; 
@@ -92,24 +132,40 @@ class hunter: public survivor{
 // survivors to breed 
 class animal: public living{
     public:
+        animal();
+        animal(animal &c);
+        virtual ~animal();
+        
         virtual void dropResources() = 0;
 };
 
 // Rabbit class, has minimal health and minimal meat drop
 class rabbit: public animal{
     public:
+        rabbit();
+        rabbit(rabbit &c);
+        virtual ~rabbit();
+
         void dropResources();
 }; 
 
 // Goat class, has the ability to give milk, meat, and leather
 class goat: public animal{
     public:
+        goat();
+        goat(goat &c);
+        virtual ~goat();
+        
         void dropResources();
 }; 
 
 // Pigs class, drops most meat but no leather
 class pig: public animal{
     public:
+        pig();
+        pig(pig &c);
+        virtual ~pig();
+
         void dropResources();
 };
 
@@ -120,6 +176,15 @@ class pig: public animal{
 class builds: public simEntity{
     private:
         int durability;
+        const int maxDurability;
+    public: 
+        builds();
+        builds(builds &c);
+        virtual ~builds();
+
+        int getDurability() const;
+        void setDurability(int);
+        int getMaxDurability() const;
 };
 
 // Specific builds classes
@@ -128,30 +193,40 @@ class builds: public simEntity{
 class hut: public builds{
     public:
         hut();
+        hut(hut &c);
+        virtual ~hut();
 };
 
 // Fence class, the main protector of survivors camp
 class fence: public builds{
     public:
         fence();
+        fence(fence &c);
+        virtual ~fence();
 };
 
 // Farm class, where farmer survivors can grow crops 
 class farm: public builds{
     public:
         farm();
-}; 
+        farm(farm &c);
+        virtual ~farm();
+};
 
 // Storage class, where survivors can keep their resources
 class storage: public builds{
     public:
         storage();
+        storage(storage &c);
+        virtual ~storage();
 };
 
 // Animal Pen class, where breeded animals can live
 class animalPen: public builds{
     public:
         animalPen();
+        animalPen(animalPen &c);
+        virtual ~animalPen();
 };
 
 // General functions
