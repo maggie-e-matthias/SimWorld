@@ -11,7 +11,7 @@ class survivor: public living{
     private: 
         int XPLevel;
     public:
-        survivor(string name = "NPC", bool isActive = true, int healthLevel = 100, int maxHealthLevel = 100, int hungerLevel = 100, int maxHungerLevel = 100, bool isSick = false);
+        survivor(string name = "New Survivor", bool isActive = true, int healthLevel = 100, int maxHealthLevel = 100, int hungerLevel = 100, int maxHungerLevel = 100, bool isSick = false);
         survivor(const survivor &c);
         virtual ~survivor();
 
@@ -26,7 +26,7 @@ class survivor: public living{
 // Doctor survivor (has the skill to make meds and heal other survivors)
 class doctor: public survivor{
     public: 
-        doctor(string name = "NPC", bool isActive = true, int healthLevel = 100, int maxHealthLevel = 100, int hungerLevel = 100, int maxHungerLevel = 100, bool isSick = false);
+        doctor(string name = "New Doctor", bool isActive = true, int healthLevel = 100, int maxHealthLevel = 100, int hungerLevel = 100, int maxHungerLevel = 100, bool isSick = false);
         doctor(const doctor &c);
         virtual ~doctor();
 
@@ -38,7 +38,7 @@ class doctor: public survivor{
 // Scout survivor (has the skill to bring more resources than others)
 class scout: public survivor{
     public: 
-        scout(string name = "NPC", bool isActive = true, int healthLevel = 100, int maxHealthLevel = 100, int hungerLevel = 100, int maxHungerLevel = 100, bool isSick = false);
+        scout(string name = "New Scout", bool isActive = true, int healthLevel = 100, int maxHealthLevel = 100, int hungerLevel = 100, int maxHungerLevel = 100, bool isSick = false);
         scout(const scout &c);
         virtual ~scout();
 
@@ -48,7 +48,7 @@ class scout: public survivor{
 // Engineer survivor (has the skill to build utilies and repair them)
 class engineer: public survivor{
     public: 
-        engineer(string name = "NPC", bool isActive = true, int healthLevel = 100, int maxHealthLevel = 100, int hungerLevel = 100, int maxHungerLevel = 100, bool isSick = false);
+        engineer(string name = "New Engineer", bool isActive = true, int healthLevel = 100, int maxHealthLevel = 100, int hungerLevel = 100, int maxHungerLevel = 100, bool isSick = false);
         engineer(const engineer &c);
         virtual ~engineer();
 
@@ -59,7 +59,7 @@ class engineer: public survivor{
 // Farmer survivor (has the skill to breed animals and grow crops)
 class farmer: public survivor{
     public: 
-        farmer(string name = "NPC", bool isActive = true, int healthLevel = 100, int maxHealthLevel = 100, int hungerLevel = 100, int maxHungerLevel = 100, bool isSick = false);
+        farmer(string name = "New Farmer", bool isActive = true, int healthLevel = 100, int maxHealthLevel = 100, int hungerLevel = 100, int maxHungerLevel = 100, bool isSick = false);
         farmer(const farmer &c);
         virtual ~farmer();
 
@@ -70,7 +70,7 @@ class farmer: public survivor{
 // Hunter survivor (has the skill to go on hunting trips and fend off enemies)
 class hunter: public survivor{
     public: 
-        hunter(string name = "NPC", bool isActive = true, int healthLevel = 100, int maxHealthLevel = 100, int hungerLevel = 100, int maxHungerLevel = 100, bool isSick = false);
+        hunter(string name = "New Hunter", bool isActive = true, int healthLevel = 100, int maxHealthLevel = 100, int hungerLevel = 100, int maxHungerLevel = 100, bool isSick = false);
         hunter(const hunter &c);
         virtual ~hunter();
 

@@ -6,7 +6,7 @@ using namespace std;
 // Average survivor class, can be instantiated and has no special skills, but can be used as a base class for other survivors
 
 // Constructors & Destructor
-survivor::survivor(string name = "NPC", bool isActive = true, int healthLevel = 100, int maxHealthLevel = 100, int hungerLevel = 100, int maxHungerLevel = 100, bool isSick = false): living(name, isActive, healthLevel, maxHealthLevel, hungerLevel, maxHungerLevel, isSick), XPLevel(0) {
+survivor::survivor(string name = "New Survivor", bool isActive = true, int healthLevel = 100, int maxHealthLevel = 100, int hungerLevel = 100, int maxHungerLevel = 100, bool isSick = false): living(name, isActive, healthLevel, maxHealthLevel, hungerLevel, maxHungerLevel, isSick), XPLevel(0) {
     cout << "Survivor created" << endl;
 }
 
@@ -40,7 +40,7 @@ void survivor::getAction() const {
 
 // Constructors & Destructor
 
-doctor::doctor(string name = "NPC", bool isActive = true, int healthLevel = 100, int maxHealthLevel = 100, int hungerLevel = 100, int maxHungerLevel = 100, bool isSick = false): survivor(name, isActive, healthLevel, maxHealthLevel, hungerLevel, maxHungerLevel, isSick) {
+doctor::doctor(string name = "New Doctor", bool isActive = true, int healthLevel = 100, int maxHealthLevel = 100, int hungerLevel = 100, int maxHungerLevel = 100, bool isSick = false): survivor(name, isActive, healthLevel, maxHealthLevel, hungerLevel, maxHungerLevel, isSick) {
     cout << "Doctor created" << endl;
 }
 
@@ -66,7 +66,7 @@ void doctor::makeMeds(){
 
 // Constructors & Destructor
 
-scout::scout(string name = "NPC", bool isActive = true, int healthLevel = 100, int maxHealthLevel = 100, int hungerLevel = 100, int maxHungerLevel = 100, bool isSick = false): survivor(name, isActive, healthLevel, maxHealthLevel, hungerLevel, maxHungerLevel, isSick) {
+scout::scout(string name = "New Scout", bool isActive = true, int healthLevel = 100, int maxHealthLevel = 100, int hungerLevel = 100, int maxHungerLevel = 100, bool isSick = false): survivor(name, isActive, healthLevel, maxHealthLevel, hungerLevel, maxHungerLevel, isSick) {
     cout << "Scout created" << endl;
 }
 
@@ -86,7 +86,7 @@ void scout::gatherResources() {
 
 // Engineer survivor
 
-engineer::engineer(string name = "NPC", bool isActive = true, int healthLevel = 100, int maxHealthLevel = 100, int hungerLevel = 100, int maxHungerLevel = 100, bool isSick = false): survivor(name, isActive, healthLevel, maxHealthLevel, hungerLevel, maxHungerLevel, isSick) {
+engineer::engineer(string name = "New Engineer", bool isActive = true, int healthLevel = 100, int maxHealthLevel = 100, int hungerLevel = 100, int maxHungerLevel = 100, bool isSick = false): survivor(name, isActive, healthLevel, maxHealthLevel, hungerLevel, maxHungerLevel, isSick) {
     cout << "Engineer created" << endl;
 }
 
@@ -109,7 +109,7 @@ void engineer::repair() {
 }
 
 // Farmer survivor
-farmer::farmer(string name = "NPC", bool isActive = true, int healthLevel = 100, int maxHealthLevel = 100, int hungerLevel = 100, int maxHungerLevel = 100, bool isSick = false): survivor(name, isActive, healthLevel, maxHealthLevel, hungerLevel, maxHungerLevel, isSick) {
+farmer::farmer(string name = "New Farmer", bool isActive = true, int healthLevel = 100, int maxHealthLevel = 100, int hungerLevel = 100, int maxHungerLevel = 100, bool isSick = false): survivor(name, isActive, healthLevel, maxHealthLevel, hungerLevel, maxHungerLevel, isSick) {
     cout << "Farmer created" << endl;
 }
 
@@ -134,7 +134,7 @@ void farmer::growCrops() {
 
 // Hunter survivor
 
-hunter::hunter(string name = "NPC", bool isActive = true, int healthLevel = 100, int maxHealthLevel = 100, int hungerLevel = 100, int maxHungerLevel = 100, bool isSick = false): survivor(name, isActive, healthLevel, maxHealthLevel, hungerLevel, maxHungerLevel, isSick) {
+hunter::hunter(string name = "New Hunter", bool isActive = true, int healthLevel = 100, int maxHealthLevel = 100, int hungerLevel = 100, int maxHungerLevel = 100, bool isSick = false): survivor(name, isActive, healthLevel, maxHealthLevel, hungerLevel, maxHungerLevel, isSick) {
     cout << "Hunter created" << endl;
 }
 
