@@ -59,6 +59,10 @@ void doctor::heal(survivor &s) {
     if(s.getHealthLevel() < s.getMaxHealthLevel()) {
         s.setHealthLevel(s.getMaxHealthLevel());
         cout << "Healed " << *s.getName() << endl;
+
+        setXPLevel(getXPLevel() + 10); // Increase XP level for healing
+        // Needs to decrement the meds (consume them)
+        
     }
     else{
         cout << s.getName() << " is already at full health!" << endl;
@@ -69,6 +73,7 @@ void doctor::heal(survivor &s) {
 
 void doctor::makeMeds(){
     // Starts a process of making meds, should take some time
+    setXPLevel(getXPLevel() + 5); // Increase XP level for making meds
 }
 
 // Scout survivor
@@ -91,6 +96,8 @@ scout::~scout() {
 // Other methods
 void scout::gatherResources() {
     // Starts a gathering process which should take some time
+    // Increases sources in their inventory
+    setXPLevel(getXPLevel() + 10); // Increase XP level for gathering resources
 }
 
 // Engineer survivor
@@ -111,10 +118,17 @@ engineer::~engineer() {
 // Other methods 
 void engineer::build() {
     // Starts a building process which should take some time
+    // e.g. startEvent(Build)
+    setXPLevel(getXPLevel() + 10);
+    // Also creates a new building soo insert constructor here
+    // Has to decrement sources
 }
 
 void engineer::repair() {
     // Starts a repairing process which should take some time
+    // e.g. startEvent(Repair)
+    setXPLevel(getXPLevel() + 5);
+    // Has to use less material than build
 }
 
 // Farmer survivor
@@ -135,10 +149,15 @@ farmer::~farmer() {
 
 void farmer::breed() {
     // Starts a breeding process which should take some time
+    setXPLevel(getXPLevel() + 10);
 }
 
 void farmer::growCrops() {
     // Starts a growing crops process which should take some time
+    // e.g. startEvent(Farm)
+    // this paricularly sets some crops to grow in the farm land, wait a bit, then harvest them
+    // and add them to inventory
+    setXPLevel(getXPLevel() + 10);
 }
 
 // Hunter survivor
@@ -164,4 +183,7 @@ void hunter::hunt() {
 
 void hunter::fendOff() {
     // Starts a fending off process which should take some time
+    // Ends the 'attack event' after 'some time', loses health in the process
+    setHealthLevel(getHealthLevel() - 5); 
+    setXPLevel(getXPLevel() + 15);
 }
