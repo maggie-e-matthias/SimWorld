@@ -56,6 +56,15 @@ doctor::~doctor() {
 // Other methods
 void doctor::heal(survivor &s) {
     // Some heal effect
+    if(s.getHealthLevel() < s.getMaxHealthLevel()) {
+        s.setHealthLevel(s.getMaxHealthLevel());
+        cout << "Healed " << *s.getName() << endl;
+    }
+    else{
+        cout << s.getName() << " is already at full health!" << endl;
+    }
+
+
 }
 
 void doctor::makeMeds(){

@@ -2,6 +2,7 @@
 
 #include <iostream> 
 #include <string>
+#include <vector>
 #include "base.h"
 using namespace std;
 
@@ -10,6 +11,7 @@ using namespace std;
 class survivor: public living{
     private: 
         int XPLevel;
+        vector<item> inventory;
     public:
         survivor(string name = "New Survivor", bool isActive = true, int healthLevel = 100, int maxHealthLevel = 100, int hungerLevel = 100, int maxHungerLevel = 100, bool isSick = false);
         survivor(const survivor &c);
