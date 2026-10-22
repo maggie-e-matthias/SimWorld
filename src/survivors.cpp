@@ -10,7 +10,7 @@ survivor::survivor(string name = "NPC", bool isActive = true, int healthLevel = 
     cout << "Survivor created" << endl;
 }
 
-survivor::survivor(survivor &c): living(c), XPLevel(c.XPLevel) {
+survivor::survivor(const survivor &c): living(c), XPLevel(c.XPLevel) {
     cout << "Survivor created" << endl;
 }
 
@@ -44,7 +44,7 @@ doctor::doctor(string name = "NPC", bool isActive = true, int healthLevel = 100,
     cout << "Doctor created" << endl;
 }
 
-doctor::doctor(doctor &c): survivor(c) {
+doctor::doctor(const doctor &c): survivor(c) {
     cout << "Doctor created" << endl;
 }
 
@@ -54,8 +54,105 @@ doctor::~doctor() {
 }
 
 // Other methods
-void doctor::heal(survivor &s) {}
+void doctor::heal(survivor &s) {
+    // Some heal effect
+}
 
-void doctor::makeMeds() {}
+void doctor::makeMeds(){
+    // Starts a process of making meds, should take some time
+}
 
 // Scout survivor
+
+// Constructors & Destructor
+
+scout::scout(string name = "NPC", bool isActive = true, int healthLevel = 100, int maxHealthLevel = 100, int hungerLevel = 100, int maxHungerLevel = 100, bool isSick = false): survivor(name, isActive, healthLevel, maxHealthLevel, hungerLevel, maxHungerLevel, isSick) {
+    cout << "Scout created" << endl;
+}
+
+scout::scout(const scout &c): survivor(c) {
+    cout << "Scout created" << endl;
+}
+
+scout::~scout() {
+    survivor::~survivor();
+    cout << "Scout destroyed" << endl;
+}
+
+// Other methods
+void scout::gatherResources() {
+    // Starts a gathering process which should take some time
+}
+
+// Engineer survivor
+
+engineer::engineer(string name = "NPC", bool isActive = true, int healthLevel = 100, int maxHealthLevel = 100, int hungerLevel = 100, int maxHungerLevel = 100, bool isSick = false): survivor(name, isActive, healthLevel, maxHealthLevel, hungerLevel, maxHungerLevel, isSick) {
+    cout << "Engineer created" << endl;
+}
+
+engineer::engineer(const engineer &c): survivor(c) {
+    cout << "Engineer created" << endl;
+}
+
+engineer::~engineer() {
+    survivor::~survivor();
+    cout << "Engineer destroyed" << endl;
+}
+
+// Other methods 
+void engineer::build() {
+    // Starts a building process which should take some time
+}
+
+void engineer::repair() {
+    // Starts a repairing process which should take some time
+}
+
+// Farmer survivor
+farmer::farmer(string name = "NPC", bool isActive = true, int healthLevel = 100, int maxHealthLevel = 100, int hungerLevel = 100, int maxHungerLevel = 100, bool isSick = false): survivor(name, isActive, healthLevel, maxHealthLevel, hungerLevel, maxHungerLevel, isSick) {
+    cout << "Farmer created" << endl;
+}
+
+farmer::farmer(const farmer &c): survivor(c) {
+    cout << "Farmer created" << endl;
+}
+
+farmer::~farmer() {
+    survivor::~survivor();
+    cout << "Farmer destroyed" << endl;
+}
+
+// Other methods
+
+void farmer::breed() {
+    // Starts a breeding process which should take some time
+}
+
+void farmer::growCrops() {
+    // Starts a growing crops process which should take some time
+}
+
+// Hunter survivor
+
+hunter::hunter(string name = "NPC", bool isActive = true, int healthLevel = 100, int maxHealthLevel = 100, int hungerLevel = 100, int maxHungerLevel = 100, bool isSick = false): survivor(name, isActive, healthLevel, maxHealthLevel, hungerLevel, maxHungerLevel, isSick) {
+    cout << "Hunter created" << endl;
+}
+
+hunter::hunter(const hunter &c): survivor(c) {
+    cout << "Hunter created" << endl;
+}
+
+hunter::~hunter() {
+    survivor::~survivor();
+    cout << "Hunter destroyed" << endl;
+}
+
+// Other methods
+
+void hunter::hunt() {
+    // Starts a hunting process which should take some time
+}
+
+void hunter::fendOff() {
+    // Starts a fending off process which should take some time
+}
