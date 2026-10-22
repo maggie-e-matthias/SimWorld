@@ -18,18 +18,19 @@ class simEntity{ // Abstract base class
         int daysItLasted;
     public: 
         // Constructors & Destructor
-        simEntity(); 
+        simEntity(string name = "NPC", bool isActive = true);
         simEntity(simEntity &c);
         virtual ~simEntity();
 
+        // Getters and Setters
         int getID();
         string* getName() const;
         void setName(string);
         bool getisActive() const;
         void setActive(bool);
         int getDaysLasted() const;
+        void setDaysLasted(int);
 
-        void howLongDidItLast();
         void virtual getAction() const = 0;
 };
 
@@ -39,9 +40,11 @@ class living: public simEntity{ // Abstract base class
     private:
         int healthLevel;
         const int maxHealthLevel;
+        int hungerlevel;
+        const int maxHungerLevel;
         bool isSick; 
     public: 
-        living();
+        living(int healthLevel = 100, int maxHealthLevel = 100, int hungerLevel = 100, int maxHungerLevel = 100, bool isSick = false);
         living(living &c);
         virtual ~living();
 
@@ -50,6 +53,11 @@ class living: public simEntity{ // Abstract base class
         bool getIsSick() const;
         void setIsSick(bool);
         int getMaxHealthLevel() const;
+        //void setMaxHealthLevel(int);
+        int getHungerLevel() const;
+        void setHungerLevel(int);
+        int getMaxHungerLevel() const;
+        //void setMaxHungerLevel(int);
 };
 
 // Builds class, contains all buildings survivors can make, 
@@ -59,12 +67,16 @@ class builds: public simEntity{
     private:
         int durability;
         const int maxDurability;
+        int upgradeLevel;
     public: 
-        builds();
+        builds(int durability = 100, int maxDurability = 100, int upgradeLevel = 0);
         builds(builds &c);
         virtual ~builds();
 
         int getDurability() const;
         void setDurability(int);
         int getMaxDurability() const;
+        //void setMaxDurability(int);
+        int getUpgradeLevel() const;
+        void setUpgradeLevel(int);
 };
