@@ -11,7 +11,7 @@ class survivor: public living{
     private: 
         int XPLevel;
     public:
-        survivor();
+        survivor(string name = "NPC", bool isActive = true, int healthLevel = 100, int maxHealthLevel = 100, int hungerLevel = 100, int maxHungerLevel = 100, bool isSick = false);
         survivor(survivor &c);
         virtual ~survivor();
 
@@ -26,7 +26,7 @@ class survivor: public living{
 // Doctor survivor (has the skill to make meds and heal other survivors)
 class doctor: public survivor{
     public: 
-        doctor();
+        doctor(string name = "NPC", bool isActive = true, int healthLevel = 100, int maxHealthLevel = 100, int hungerLevel = 100, int maxHungerLevel = 100, bool isSick = false);
         doctor(doctor &c);
         virtual ~doctor();
 
