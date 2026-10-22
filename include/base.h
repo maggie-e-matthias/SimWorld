@@ -1,8 +1,10 @@
-#pragma once
+#pragma once 
 
 #include <iostream>
 #include <string>
 using namespace std;
+
+/* --- Base Classes --- */
 
 // The Base for all other entities
 
@@ -79,4 +81,17 @@ class builds: public simEntity{
         //void setMaxDurability(int);
         int getUpgradeLevel() const;
         void setUpgradeLevel(int);
+};
+
+
+/* --- Resource Items --- */
+
+/* Items have been defined explicitly as a struct rather than a class since they are 
+   far */
+
+enum itemType {WATER, FRUITS, COCONUTS, MEAT, FISH, MEDS, WOOD, LEATHER, METAL, STONE};
+
+struct item{
+    int quantity;
+    int type; 
 };
