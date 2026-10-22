@@ -13,13 +13,13 @@ using namespace std;
 
 int simEntity::count = 0;
 
-simEntity::simEntity(string name = "NPC", bool isActive = true): isActive(isActive), daysItLasted(0) {
+simEntity::simEntity(string name = "New Entity", bool isActive = true): isActive(isActive), daysItLasted(0) {
     count++;
     ID = count;
     this->name = new string(name);
 }
 
-simEntity::simEntity(simEntity &c): isActive(c.isActive), daysItLasted(c.daysItLasted) {
+simEntity::simEntity(const simEntity &c): isActive(c.isActive), daysItLasted(c.daysItLasted) {
     count++;
     ID = count;
     name = new string(*c.name);
@@ -65,12 +65,12 @@ void simEntity::setDaysLasted(int days) {
 
 // Constructors & Destructor
 
-living::living(int healthLevel = 100, int maxHealthLevel = 100, int hungerLevel = 0, int maxHungerLevel = 100, bool isSick = false): simEntity(), healthLevel(healthLevel), maxHealthLevel(maxHealthLevel), hungerlevel(hungerLevel), maxHungerLevel(maxHungerLevel), isSick(isSick) {
+living::living(string name = "New Living Entity", bool isActive = true, int healthLevel = 100, int maxHealthLevel = 100, int hungerLevel = 100, int maxHungerLevel = 100, bool isSick = false): simEntity(name), healthLevel(healthLevel), maxHealthLevel(maxHealthLevel), hungerlevel(hungerLevel), maxHungerLevel(maxHungerLevel), isSick(isSick) {
     cout << "Living entity created" << endl;
     
 }
 
-living::living(living &c): simEntity(c), healthLevel(c.healthLevel), maxHealthLevel(c.maxHealthLevel), hungerlevel(c.hungerlevel), maxHungerLevel(c.maxHungerLevel), isSick(c.isSick) {
+living::living(const living &c): simEntity(c), healthLevel(c.healthLevel), maxHealthLevel(c.maxHealthLevel), hungerlevel(c.hungerlevel), maxHungerLevel(c.maxHungerLevel), isSick(c.isSick) {
     cout << "Living entity created" << endl;
 }
 
@@ -131,7 +131,7 @@ builds::builds(int durability = 100, int maxDurability = 100, int upgradeLevel =
     cout << "Build entity created" << endl;
 }
 
-builds::builds(builds &c): simEntity(c), durability(c.durability), maxDurability(c.maxDurability), upgradeLevel(c.upgradeLevel) {
+builds::builds(const builds &c): simEntity(c), durability(c.durability), maxDurability(c.maxDurability), upgradeLevel(c.upgradeLevel) {
     cout << "Build entity created" << endl;
 }
 
