@@ -92,6 +92,6 @@ class builds: public simEntity{
 /* Items have been defined explicitly as an enum class rather than a class since they are 
    far simpler than needing a class of their own*/
 
-enum class item {WATER, FRUITS, COCONUTS, MEAT, FISH, MEDS, WOOD, LEATHER, METAL, STONE};
+enum class item {NONE, WATER, FRUITS, COCONUTS, MEAT, FISH, MEDS, WOOD, LEATHER, METAL, STONE};
 
 
