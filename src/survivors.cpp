@@ -11,7 +11,7 @@ using namespace std;
 // Attributes inherited from living class (e.g. health level, hunger level, etc..) are set to their default values
 // that are listed in base.h, since the survivors do work with these particular values (like maxHealthLevel = 100 not less),
 // these values will not be overridden
-survivor::survivor(string name, bool isActive): living(name, isActive), XPLevel(0), maxInventorySize(10) {
+survivor::survivor(string name, bool isActive, int maxInventorySize): living(name, isActive), XPLevel(0), maxInventorySize(maxInventorySize) {
     cout << "Survivor created" << endl;
 }
 
@@ -20,7 +20,6 @@ survivor::survivor(const survivor &c): living(c), XPLevel(c.XPLevel), maxInvento
 }
 
 survivor::~survivor() {
-    living::~living();
     cout << "Survivor destroyed" << endl;
 }
 
@@ -65,7 +64,7 @@ vector<item> survivor::getInventory() const{
 // If item doesn't exist, it returns -1
 int survivor::findInInventory(item I){
    for(int i = 0, n = inventory.size(); i < n; i++){
-        if(I.type == inventory[i].type){
+        if(I == inventory[i]){
             return i;
         }
    }
@@ -73,7 +72,7 @@ int survivor::findInInventory(item I){
 }
 
 // Double check for if item not found
-void survivor::useFromInventory(item I, int quantity){
+void survivor::useFromInventory(item I){
     if(inventory.empty()){
         cout << "Inventory is empty!" << endl;
     }
@@ -83,12 +82,7 @@ void survivor::useFromInventory(item I, int quantity){
             cout << "Sorry, the item you're trying to use doesn't exist" << endl;
         }
         else{
-            if(quantity > inventory[tempIndex].quantity){
-                inventory.erase(inventory.begin() + tempIndex); 
-            }
-            else{
-                inventory[tempIndex].quantity -= quantity;
-            }
+            inventory.erase(inventory.begin() + tempIndex); 
         }
     }
 }
@@ -107,7 +101,6 @@ doctor::doctor(const doctor &c): survivor(c) {
 }
 
 doctor::~doctor() {
-    survivor::~survivor();
     cout << "Doctor destroyed" << endl;
 }
 
@@ -115,12 +108,18 @@ doctor::~doctor() {
 void doctor::heal(survivor &s) {
     // Some heal effect
     if(s.getHealthLevel() < s.getMaxHealthLevel()) {
-        s.setHealthLevel(s.getMaxHealthLevel());
-        cout << "Healed " << *s.getName() << endl;
 
-        setXPLevel(getXPLevel() + 10); // Increase XP level for healing
-        // Needs to decrement the meds (consume them)
-        
+        if(findInInventory(MEDS) == -1){
+            cout << "Not enough Meds" << endl;
+        }
+        else{
+            s.setHealthLevel(s.getMaxHealthLevel());
+            cout << "Healed " << *s.getName() << endl;
+
+            setXPLevel(getXPLevel() + 10); // Increase XP level for healing
+            // Needs to decrement the meds (consume them)
+            useFromInventory(MEDS);
+        }  
     }
     else{
         cout << s.getName() << " is already at full health!" << endl;
@@ -131,6 +130,7 @@ void doctor::heal(survivor &s) {
 
 void doctor::makeMeds(){
     // Starts a process of making meds, should take some time
+    addToInventory(MEDS);
     setXPLevel(getXPLevel() + 5); // Increase XP level for making meds
 }
 
@@ -138,7 +138,9 @@ void doctor::makeMeds(){
 
 // Constructors & Destructor
 
-scout::scout(string name, bool isActive): survivor(name, isActive) {
+// The scout survivor has an extended inventory since their special skill is
+// to gather more sources than other survivors
+scout::scout(string name, bool isActive): survivor(name, isActive, 20) {
     cout << "Scout created" << endl;
 }
 
@@ -169,7 +171,6 @@ engineer::engineer(const engineer &c): survivor(c) {
 }
 
 engineer::~engineer() {
-    survivor::~survivor();
     cout << "Engineer destroyed" << endl;
 }
 
@@ -199,7 +200,6 @@ farmer::farmer(const farmer &c): survivor(c) {
 }
 
 farmer::~farmer() {
-    survivor::~survivor();
     cout << "Farmer destroyed" << endl;
 }
 
@@ -229,7 +229,6 @@ hunter::hunter(const hunter &c): survivor(c) {
 }
 
 hunter::~hunter() {
-    survivor::~survivor();
     cout << "Hunter destroyed" << endl;
 }
 

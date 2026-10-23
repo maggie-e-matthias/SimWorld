@@ -17,7 +17,7 @@ class survivor: public living{
         vector<item> inventory;
         const int maxInventorySize;
     public:
-        survivor(string name = "New Survivor", bool isActive = true);
+        survivor(string name = "New Survivor", bool isActive = true, int maxInventorySize = 10);
         survivor(const survivor &c);
         virtual ~survivor();
 
@@ -29,7 +29,9 @@ class survivor: public living{
         bool isInventoryEmpty() const;
         vector<item> getInventory() const; // Gets the entire inventory
         int findInInventory(item); // Finds an item in the inventory for ease of access
-        void useFromInventory(item, int); // Actually consumes item from inventory
+        void useFromInventory(item); // Actually consumes item from inventory
+
+        void transferItem(item, simEntity*); //For transfering items to and from other survivors, storage, etc
         
 
         void getAction() const override;

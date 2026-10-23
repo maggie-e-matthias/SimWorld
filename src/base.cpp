@@ -77,7 +77,6 @@ living::living(const living &c): simEntity(c), healthLevel(c.healthLevel), maxHe
 }
 
 living::~living() {
-    simEntity::~simEntity();
     cout << "Living entity destroyed" << endl;
 }
 
@@ -138,7 +137,6 @@ builds::builds(const builds &c): simEntity(c), durability(c.durability), maxDura
 }
 
 builds::~builds() {
-    simEntity::~simEntity();
     cout << "Build entity destroyed" << endl;
 }
 

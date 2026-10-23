@@ -87,13 +87,9 @@ class builds: public simEntity{
 
 /* --- Resource Items --- */
 
-/* Items have been defined explicitly as a struct rather than a class since they are 
+/* Items have been defined explicitly as an enum class rather than a class since they are 
    far simpler than needing a class of their own*/
 
-enum itemType {WATER, FRUITS, COCONUTS, MEAT, FISH, MEDS, WOOD, LEATHER, METAL, STONE};
+enum class item {WATER, FRUITS, COCONUTS, MEAT, FISH, MEDS, WOOD, LEATHER, METAL, STONE};
 
-struct item{
-    int quantity;
-    int type; 
-};
 
