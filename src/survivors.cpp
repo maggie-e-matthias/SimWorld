@@ -61,8 +61,15 @@ vector<item> survivor::getInventory() const{
     return this->inventory;
 }
 
-item survivor::getFromInventory(item I) const{
-    // Not sure how this will be useful
+// Finds an item in survivor inventory and returns its index
+// If item doesn't exist, it returns -1
+int survivor::findInInventory(item I){
+   for(int i = 0, n = inventory.size(); i < n; i++){
+        if(I.type == inventory[i].type){
+            return i;
+        }
+   }
+   return -1;
 }
 
 // Double check for if item not found
@@ -71,14 +78,16 @@ void survivor::useFromInventory(item I, int quantity){
         cout << "Inventory is empty!" << endl;
     }
     else{
-        for(int i = 0, n = inventory.size(); i < n; i++){
-            if(I.type == inventory[i].type){
-                if(quantity > inventory[i].quantity){
-                    inventory.erase(inventory.begin() + i);
-                }
-                else{
-                    inventory[i].quantity -= quantity;
-                }  
+        int tempIndex = findInInventory(I);
+        if(tempIndex == -1){
+            cout << "Sorry, the item you're trying to use doesn't exist" << endl;
+        }
+        else{
+            if(quantity > inventory[tempIndex].quantity){
+                inventory.erase(inventory.begin() + tempIndex); 
+            }
+            else{
+                inventory[tempIndex].quantity -= quantity;
             }
         }
     }

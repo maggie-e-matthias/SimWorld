@@ -28,7 +28,7 @@ class survivor: public living{
         void addToInventory(item);
         bool isInventoryEmpty() const;
         vector<item> getInventory() const; // Gets the entire inventory
-        item getFromInventory(item) const; // Gets one single item from inventory
+        int findInInventory(item); // Finds an item in the inventory for ease of access
         void useFromInventory(item, int); // Actually consumes item from inventory
         
 
