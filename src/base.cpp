@@ -13,7 +13,7 @@ using namespace std;
 
 int simEntity::count = 0;
 
-simEntity::simEntity(string name = "New Entity", bool isActive = true): isActive(isActive), daysItLasted(0) {
+simEntity::simEntity(string name, bool isActive): isActive(isActive), daysItLasted(0) {
     count++;
     ID = count;
     this->name = new string(name);
@@ -65,7 +65,9 @@ void simEntity::setDaysLasted(int days) {
 
 // Constructors & Destructor
 
-living::living(string name = "New Living Entity", bool isActive = true, int healthLevel = 100, int maxHealthLevel = 100, int hungerLevel = 100, int maxHungerLevel = 100, bool isSick = false): simEntity(name), healthLevel(healthLevel), maxHealthLevel(maxHealthLevel), hungerlevel(hungerLevel), maxHungerLevel(maxHungerLevel), isSick(isSick) {
+// Some values like health level, hunger level, etc, are set to default values (listed in header file)
+// that are only changed if the derived class requires otherwise
+living::living(string name, bool isActive, int healthLevel, int maxHealthLevel, int hungerLevel, int maxHungerLevel, bool isSick): simEntity(name, isActive), healthLevel(healthLevel), maxHealthLevel(maxHealthLevel), hungerlevel(hungerLevel), maxHungerLevel(maxHungerLevel), isSick(isSick) {
     cout << "Living entity created" << endl;
     
 }

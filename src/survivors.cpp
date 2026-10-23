@@ -6,11 +6,16 @@ using namespace std;
 // Average survivor class, can be instantiated and has no special skills, but can be used as a base class for other survivors
 
 // Constructors & Destructor
-survivor::survivor(string name = "New Survivor", bool isActive = true, int healthLevel = 100, int maxHealthLevel = 100, int hungerLevel = 100, int maxHungerLevel = 100, bool isSick = false): living(name, isActive, healthLevel, maxHealthLevel, hungerLevel, maxHungerLevel, isSick), XPLevel(0) {
+
+// Attributes inherited from living class (e.g. health level, hunger level, etc..) are set to their default values
+// that are listed in base.h, since the survivors do work with these particular values (like maxHealthLevel = 100 not less),
+// these values will not be overridden
+survivor::survivor(string name, bool isActive): living(name, isActive), XPLevel(0), maxInventorySize(10) {
+    inventory = new item[maxInventorySize];
     cout << "Survivor created" << endl;
 }
 
-survivor::survivor(const survivor &c): living(c), XPLevel(c.XPLevel) {
+survivor::survivor(const survivor &c): living(c), XPLevel(c.XPLevel), maxInventorySize(c.maxInventorySize) {
     cout << "Survivor created" << endl;
 }
 
@@ -31,8 +36,9 @@ void survivor::setXPLevel(int XPLevel) {
 
 // Other methods 
 void survivor::getAction() const {
-    // Get the action from the user
-    cout << "What do you want to do? (move, attack, heal, quit): ";
+    // Still unsure of what the implementation should be
+    // Perhaps (somehow) return the action they have done for
+    // this turn
 }
 
 
@@ -40,7 +46,7 @@ void survivor::getAction() const {
 
 // Constructors & Destructor
 
-doctor::doctor(string name = "New Doctor", bool isActive = true, int healthLevel = 100, int maxHealthLevel = 100, int hungerLevel = 100, int maxHungerLevel = 100, bool isSick = false): survivor(name, isActive, healthLevel, maxHealthLevel, hungerLevel, maxHungerLevel, isSick) {
+doctor::doctor(string name, bool isActive): survivor(name, isActive) {
     cout << "Doctor created" << endl;
 }
 
@@ -80,7 +86,7 @@ void doctor::makeMeds(){
 
 // Constructors & Destructor
 
-scout::scout(string name = "New Scout", bool isActive = true, int healthLevel = 100, int maxHealthLevel = 100, int hungerLevel = 100, int maxHungerLevel = 100, bool isSick = false): survivor(name, isActive, healthLevel, maxHealthLevel, hungerLevel, maxHungerLevel, isSick) {
+scout::scout(string name, bool isActive): survivor(name, isActive) {
     cout << "Scout created" << endl;
 }
 
@@ -102,7 +108,7 @@ void scout::gatherResources() {
 
 // Engineer survivor
 
-engineer::engineer(string name = "New Engineer", bool isActive = true, int healthLevel = 100, int maxHealthLevel = 100, int hungerLevel = 100, int maxHungerLevel = 100, bool isSick = false): survivor(name, isActive, healthLevel, maxHealthLevel, hungerLevel, maxHungerLevel, isSick) {
+engineer::engineer(string name, bool isActive): survivor(name, isActive) {
     cout << "Engineer created" << endl;
 }
 
@@ -132,7 +138,7 @@ void engineer::repair() {
 }
 
 // Farmer survivor
-farmer::farmer(string name = "New Farmer", bool isActive = true, int healthLevel = 100, int maxHealthLevel = 100, int hungerLevel = 100, int maxHungerLevel = 100, bool isSick = false): survivor(name, isActive, healthLevel, maxHealthLevel, hungerLevel, maxHungerLevel, isSick) {
+farmer::farmer(string name, bool isActive): survivor(name, isActive) {
     cout << "Farmer created" << endl;
 }
 
@@ -162,7 +168,7 @@ void farmer::growCrops() {
 
 // Hunter survivor
 
-hunter::hunter(string name = "New Hunter", bool isActive = true, int healthLevel = 100, int maxHealthLevel = 100, int hungerLevel = 100, int maxHungerLevel = 100, bool isSick = false): survivor(name, isActive, healthLevel, maxHealthLevel, hungerLevel, maxHungerLevel, isSick) {
+hunter::hunter(string name, bool isActive): survivor(name, isActive) {
     cout << "Hunter created" << endl;
 }
 
