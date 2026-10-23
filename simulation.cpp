@@ -1,3 +1,14 @@
+/*
+    Authors: 
+    - Magdoleen Matthias 900152595
+    - Hanan Elnakeeb 900253826
+
+        ------ Survivor Islan Simulator ------
+    Where you either make it back to civilization or die trying!
+
+*/
+
+
 #include "include/survivors.h"
 #include "include/builds.h"
 #include "include/animals.h"
