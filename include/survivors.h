@@ -2,7 +2,11 @@
 
 #include <iostream> 
 #include <string>
+#include <vector>
 #include "base.h"
+
+#include "builds.h"
+#include "animals.h"
 using namespace std;
 
 
@@ -10,13 +14,17 @@ using namespace std;
 class survivor: public living{
     private: 
         int XPLevel;
+        item* inventory;
+        const int maxInventorySize;
     public:
-        survivor(string name = "NPC", bool isActive = true, int healthLevel = 100, int maxHealthLevel = 100, int hungerLevel = 100, int maxHungerLevel = 100, bool isSick = false);
-        survivor(survivor &c);
+        survivor(string name = "New Survivor", bool isActive = true);
+        survivor(const survivor &c);
         virtual ~survivor();
 
         int getXPLevel() const;
         void setXPLevel(int);
+
+        void addToInventory(item);
 
         void getAction() const override;
 };
@@ -26,8 +34,8 @@ class survivor: public living{
 // Doctor survivor (has the skill to make meds and heal other survivors)
 class doctor: public survivor{
     public: 
-        doctor(string name = "NPC", bool isActive = true, int healthLevel = 100, int maxHealthLevel = 100, int hungerLevel = 100, int maxHungerLevel = 100, bool isSick = false);
-        doctor(doctor &c);
+        doctor(string name = "New Doctor", bool isActive = true);
+        doctor(const doctor &c);
         virtual ~doctor();
 
         void heal(survivor &s);
@@ -38,8 +46,8 @@ class doctor: public survivor{
 // Scout survivor (has the skill to bring more resources than others)
 class scout: public survivor{
     public: 
-        scout();
-        scout(scout &c);
+        scout(string name = "New Scout", bool isActive = true);
+        scout(const scout &c);
         virtual ~scout();
 
         void gatherResources();
@@ -48,8 +56,8 @@ class scout: public survivor{
 // Engineer survivor (has the skill to build utilies and repair them)
 class engineer: public survivor{
     public: 
-        engineer();
-        engineer(engineer &c);
+        engineer(string name = "New Engineer", bool isActive = true);
+        engineer(const engineer &c);
         virtual ~engineer();
 
         void build();
@@ -59,8 +67,8 @@ class engineer: public survivor{
 // Farmer survivor (has the skill to breed animals and grow crops)
 class farmer: public survivor{
     public: 
-        farmer();
-        farmer(farmer &c);
+        farmer(string name = "New Farmer", bool isActive = true);
+        farmer(const farmer &c);
         virtual ~farmer();
 
         void breed();
@@ -70,8 +78,8 @@ class farmer: public survivor{
 // Hunter survivor (has the skill to go on hunting trips and fend off enemies)
 class hunter: public survivor{
     public: 
-        hunter();
-        hunter(hunter &c);
+        hunter(string name = "New Hunter", bool isActive = true);
+        hunter(const hunter &c);
         virtual ~hunter();
 
         void hunt();
