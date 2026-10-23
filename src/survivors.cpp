@@ -1,6 +1,7 @@
 #include "include/survivors.h"
 #include <iostream>
 #include <string>
+#include <vector>
 using namespace std;
 
 // Average survivor class, can be instantiated and has no special skills, but can be used as a base class for other survivors
@@ -11,7 +12,6 @@ using namespace std;
 // that are listed in base.h, since the survivors do work with these particular values (like maxHealthLevel = 100 not less),
 // these values will not be overridden
 survivor::survivor(string name, bool isActive): living(name, isActive), XPLevel(0), maxInventorySize(10) {
-    inventory = new item[maxInventorySize];
     cout << "Survivor created" << endl;
 }
 
@@ -39,6 +39,49 @@ void survivor::getAction() const {
     // Still unsure of what the implementation should be
     // Perhaps (somehow) return the action they have done for
     // this turn
+}
+
+// Inventory methods
+
+void survivor::addToInventory(item I){
+    if(inventory.size() == maxInventorySize){ // Has to check if it's full
+        cout << "Sorry, " << this->getName() << "'s inventory is full" << endl;
+    }
+    else{
+        this->inventory.push_back(I);
+    }   
+}
+
+bool survivor::isInventoryEmpty() const{
+    return inventory.empty();
+}
+
+// This returns the entire survivor's inventory, not sure how this is useful yet
+vector<item> survivor::getInventory() const{
+    return this->inventory;
+}
+
+item survivor::getFromInventory(item I) const{
+    // Not sure how this will be useful
+}
+
+// Double check for if item not found
+void survivor::useFromInventory(item I, int quantity){
+    if(inventory.empty()){
+        cout << "Inventory is empty!" << endl;
+    }
+    else{
+        for(int i = 0, n = inventory.size(); i < n; i++){
+            if(I.type == inventory[i].type){
+                if(quantity > inventory[i].quantity){
+                    inventory.erase(inventory.begin() + i);
+                }
+                else{
+                    inventory[i].quantity -= quantity;
+                }  
+            }
+        }
+    }
 }
 
 

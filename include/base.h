@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <string>
+#include <vector>
 using namespace std;
 
 /* --- Base Classes --- */
@@ -87,7 +88,7 @@ class builds: public simEntity{
 /* --- Resource Items --- */
 
 /* Items have been defined explicitly as a struct rather than a class since they are 
-   far */
+   far simpler than needing a class of their own*/
 
 enum itemType {WATER, FRUITS, COCONUTS, MEAT, FISH, MEDS, WOOD, LEATHER, METAL, STONE};
 
@@ -95,3 +96,4 @@ struct item{
     int quantity;
     int type; 
 };
+

@@ -14,7 +14,7 @@ using namespace std;
 class survivor: public living{
     private: 
         int XPLevel;
-        item* inventory;
+        vector<item> inventory;
         const int maxInventorySize;
     public:
         survivor(string name = "New Survivor", bool isActive = true);
@@ -24,7 +24,13 @@ class survivor: public living{
         int getXPLevel() const;
         void setXPLevel(int);
 
+        // Inventory system methods
         void addToInventory(item);
+        bool isInventoryEmpty() const;
+        vector<item> getInventory() const; // Gets the entire inventory
+        item getFromInventory(item) const; // Gets one single item from inventory
+        void useFromInventory(item, int); // Actually consumes item from inventory
+        
 
         void getAction() const override;
 };
