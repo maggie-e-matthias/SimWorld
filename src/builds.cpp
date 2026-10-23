@@ -4,72 +4,82 @@
 #include <vector>
 using namespace std;
 
-hut::hut(string name, bool isActive, int durability, int maxDurability): builds(durability, maxDurability) {
-    this->setName(name);
-    this->setActive(isActive);
+template <int N>
+hut<N>::hut(string name, bool isActive, int durability, int maxDurability): builds(name, isActive, durability, maxDurability) {
+    this->buildRequirements[] = {item::WOOD, item::STONE};
     cout << "Hut created" << endl;
 }
 
-hut::hut(hut &c): builds(c) {
+template <int N>
+hut<N>::hut(hut<N> &c): builds(c) {
     cout << "Hut created" << endl;
 }
 
-hut::~hut() {
+template <int N>
+hut<N>::~hut() {
     cout << "Hut destroyed" << endl;
 }
 
-fence::fence(string name, bool isActive, int durability, int maxDurability): builds(durability, maxDurability) {
-    this->setName(name);
-    this->setActive(isActive);
+template <int N>
+fence<N>::fence(string name, bool isActive, int durability, int maxDurability): builds(name, isActive, durability, maxDurability) {
+    this->buildRequirements[] = {item::WOOD, item::WOOD};
     cout << "Fence created" << endl;
 }
 
-fence::fence(fence &c): builds(c) {
+template <int N>
+fence<N>::fence(fence<N> &c): builds(c) {
     cout << "Fence created" << endl;
 }
 
-fence::~fence() {
+template <int N>
+fence<N>::~fence() {
     cout << "Fence destroyed" << endl;
 }
 
-farm::farm(string name, bool isActive, int durability, int maxDurability): builds(durability, maxDurability) {
-    this->setName(name);
-    this->setActive(isActive);
+template <int N>
+farm<N>::farm(string name, bool isActive, int durability, int maxDurability): builds(name, isActive, durability, maxDurability) {
+    this->buildRequriements[] = {item::WOOD, item::WATER, item::STONE};
     cout << "Farm created" << endl;
 }
 
-farm::farm(farm &c): builds(c) {
+template <int N>
+farm<N>::farm(farm<N> &c): builds(c) {
     cout << "Farm created" << endl;
 }
 
-farm::~farm() {
+template <int N>
+farm<N>::~farm() {
     cout << "Farm destroyed" << endl;
 }
 
-storage::storage(string name, bool isActive, int durability, int maxDurability): builds(durability, maxDurability) {
-    this->setName(name);
-    this->setActive(isActive);
+template <int N>
+storage<N>::storage(string name, bool isActive, int durability, int maxDurability): builds(name, isActive, durability, maxDurability) {
+    this->buildRequirements[] = {item::LEATHER, item::WOOD, item::METAL};
     cout << "Storage created" << endl;
 }
 
-storage::storage(storage &c): builds(c) {
+template <int N>
+storage<N>::storage(storage<N> &c): builds(c) {
     cout << "Storage created" << endl;
 }
 
-storage::~storage() {
+template <int N>
+storage<N>::~storage() {
     cout << "Storage destroyed" << endl;
 }
 
-animalPen::animalPen(string name, bool isActive, int durability, int maxDurability): builds(durability, maxDurability) {
-    this->setName(name);
-    this->setActive(isActive);
+template <int N>
+animalPen<N>::animalPen(string name, bool isActive, int durability, int maxDurability): builds(name, isActive, durability, maxDurability) {
+    this->buildRequirements[] = {item::WOOD, item::STONE, item::LEATHER};
     cout << "Animal Pen created" << endl;
 }
 
-animalPen::animalPen(animalPen &c): builds(c) {
+template <int N>
+animalPen<N>::animalPen(animalPen<N> &c): builds(c) {
     cout << "Animal Pen created" << endl;
 }
 
-animalPen::~animalPen() {
+template <int N>
+animalPen<N>::~animalPen() {
     cout << "Animal Pen destroyed" << endl;
 }

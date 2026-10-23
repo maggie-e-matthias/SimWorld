@@ -128,29 +128,35 @@ int living::getMaxHungerLevel() const {
 
 // Constructors & Destructor
 
-builds::builds(int durability = 100, int maxDurability = 100, int upgradeLevel = 0): simEntity(), durability(durability), maxDurability(maxDurability), upgradeLevel(upgradeLevel) {
+template <int N>
+builds<N>::builds<N>(string name, bool isActive,int durability, int maxDurability, int upgradeLevel, item buildRequirements[N]): simEntity(name, isActive), durability(durability), maxDurability(maxDurability), upgradeLevel(upgradeLevel), buildRequirements(buildRequirements) {
     cout << "Build entity created" << endl;
 }
 
-builds::builds(const builds &c): simEntity(c), durability(c.durability), maxDurability(c.maxDurability), upgradeLevel(c.upgradeLevel) {
+template <int N>
+builds<N>::builds(const builds<N> &c): simEntity(c), durability(c.durability), maxDurability(c.maxDurability), upgradeLevel(c.upgradeLevel) {
     cout << "Build entity created" << endl;
 }
 
-builds::~builds() {
+template <int N>
+builds<N>::~builds() {
     cout << "Build entity destroyed" << endl;
 }
 
 // Getters and Setters
 
-int builds::getDurability() const {
+template <int N>
+int builds<N>::getDurability() const {
     return durability;
 }
 
-void builds::setDurability(int durability) {
+template <int N>
+void builds<N>::setDurability(int durability) {
     this->durability = durability;
 }
 
-int builds::getMaxDurability() const {
+template <int N>
+int builds<N>::getMaxDurability() const {
     return maxDurability;
 }
 
@@ -158,10 +164,12 @@ int builds::getMaxDurability() const {
 //     this->maxDurability = maxDurability;
 // }
 
-int builds::getUpgradeLevel() const {
+template <int N>
+int builds<N>::getUpgradeLevel() const {
     return upgradeLevel;
 }
 
-void builds::setUpgradeLevel(int upgradeLevel) {
+template <int N>
+void builds<N>::setUpgradeLevel(int upgradeLevel) {
     this->upgradeLevel = upgradeLevel;
 }

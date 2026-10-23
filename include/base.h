@@ -66,14 +66,16 @@ class living: public simEntity{ // Abstract base class
 // Builds class, contains all buildings survivors can make, 
 // only on condition they have enough resources to build them, plus it invokes build and repair events
 
+template <int N>
 class builds: public simEntity{
     private:
         int durability;
         const int maxDurability;
         int upgradeLevel;
+        item buildRequirements[N];
     public: 
-        builds(int durability = 100, int maxDurability = 100, int upgradeLevel = 0);
-        builds(const builds &c);
+        builds<N>(string name = "New Build", bool isActive = true, int durability = 100, int maxDurability = 100, int upgradeLevel = 1, item buildRequirements[N] = {item::WOOD});
+        builds<N>(const builds &c);
         virtual ~builds();
 
         int getDurability() const;

@@ -9,7 +9,8 @@ using namespace std;
 // Specific builds classes
 
 // Hut class, most basic build where survivors spend the night
-class hut: public builds{
+template <int N>
+class hut: public builds<N>{
     public:
         hut(string name = "New Hut", bool isActive = true, int durability = 100, int maxDurability = 100);
         hut(hut &c);
@@ -17,7 +18,8 @@ class hut: public builds{
 };
 
 // Fence class, the main protector of survivors camp
-class fence: public builds{
+template <int N>
+class fence: public builds<N>{
     public:
         fence(string name = "New Fence", bool isActive = true, int durability = 100, int maxDurability = 100);
         fence(fence &c);
@@ -25,7 +27,9 @@ class fence: public builds{
 };
 
 // Farm class, where farmer survivors can grow crops 
-class farm: public builds{
+
+template <int N>
+class farm: public builds<N>{
     public:
         farm(string name = "New Farm", bool isActive = true, int durability = 100, int maxDurability = 100);
         farm(farm &c);
@@ -33,7 +37,9 @@ class farm: public builds{
 };
 
 // Storage class, where survivors can keep their resources
-class storage: public builds{
+
+template <int N>
+class storage: public builds<N>{
     public:
         storage(string name = "New Storage", bool isActive = true, int durability = 100, int maxDurability = 100);
         storage(storage &c);
@@ -41,7 +47,8 @@ class storage: public builds{
 };
 
 // Animal Pen class, where breeded animals can live
-class animalPen: public builds{
+template <int N>
+class animalPen: public builds<N>{
     public:
         animalPen(string name = "New Animal Pen", bool isActive = true, int durability = 100, int maxDurability = 100);
         animalPen(animalPen &c);
