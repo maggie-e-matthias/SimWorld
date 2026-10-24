@@ -165,3 +165,6 @@ int builds::getUpgradeLevel() const {
 void builds::setUpgradeLevel(int upgradeLevel) {
     this->upgradeLevel = upgradeLevel;
 }
+void simEntity::setIDForUndo(int id) {
+    ID = id;
+}

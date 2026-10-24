@@ -1,49 +1,84 @@
+
 #pragma once
 
 #include <iostream>
 #include <string>
-#include "base.h"
+#include <vector>
+#include "include/base.h"
+
 using namespace std;
 
 
-// Specific builds classes
+// Hut: a shelter where survivors can spend the night.
+class hut : public builds {
+private:
+    vector<string> features;
 
-// Hut class, most basic build where survivors spend the night
-class hut: public builds{
-    public:
-        hut();
-        hut(hut &c);
-        virtual ~hut();
+public:
+    hut();
+    hut(const hut& c);
+    ~hut() override;
+
+    void getAction() const override;
+    simEntity* clone() const override;
 };
 
-// Fence class, the main protector of survivors camp
-class fence: public builds{
-    public:
-        fence();
-        fence(fence &c);
-        virtual ~fence();
+
+// Fence: protects the survivors' camp.
+class fence : public builds {
+private:
+    vector<string> features;
+
+public:
+    fence();
+    fence(const fence& c);
+    ~fence() override;
+
+    void getAction() const override;
+    simEntity* clone() const override;
 };
 
-// Farm class, where farmer survivors can grow crops 
-class farm: public builds{
-    public:
-        farm();
-        farm(farm &c);
-        virtual ~farm();
+
+// Farm: allows survivors to grow crops.
+class farm : public builds {
+private:
+    vector<string> features;
+
+public:
+    farm();
+    farm(const farm& c);
+    ~farm() override;
+
+    void getAction() const override;
+    simEntity* clone() const override;
 };
 
-// Storage class, where survivors can keep their resources
-class storage: public builds{
-    public:
-        storage();
-        storage(storage &c);
-        virtual ~storage();
+
+// Storage: keeps the survivors' resources.
+class storage : public builds {
+private:
+    vector<string> features;
+
+public:
+    storage();
+    storage(const storage& c);
+    ~storage() override;
+
+    void getAction() const override;
+    simEntity* clone() const override;
 };
 
-// Animal Pen class, where breeded animals can live
-class animalPen: public builds{
-    public:
-        animalPen();
-        animalPen(animalPen &c);
-        virtual ~animalPen();
+
+// Animal pen: provides a place for animals to live.
+class animalPen : public builds {
+private:
+    vector<string> features;
+
+public:
+    animalPen();
+    animalPen(const animalPen& c);
+    ~animalPen() override;
+
+    void getAction() const override;
+    simEntity* clone() const override;
 };

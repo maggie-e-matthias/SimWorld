@@ -19,7 +19,7 @@ class simEntity{ // Abstract base class
     public: 
         // Constructors & Destructor
         simEntity(string name = "NPC", bool isActive = true);
-        simEntity(simEntity &c);
+        simEntity(const simEntity &c);
         virtual ~simEntity();
 
         // Getters and Setters
@@ -32,6 +32,9 @@ class simEntity{ // Abstract base class
         void setDaysLasted(int);
 
         void virtual getAction() const = 0;
+        virtual simEntity* clone() const = 0;
+        void setIDForUndo(int id);
+
 };
 
 
@@ -45,7 +48,7 @@ class living: public simEntity{ // Abstract base class
         bool isSick; 
     public: 
         living(int healthLevel = 100, int maxHealthLevel = 100, int hungerLevel = 100, int maxHungerLevel = 100, bool isSick = false);
-        living(living &c);
+        living(const living &c);
         virtual ~living();
 
         int getHealthLevel() const;
@@ -70,7 +73,7 @@ class builds: public simEntity{
         int upgradeLevel;
     public: 
         builds(int durability = 100, int maxDurability = 100, int upgradeLevel = 0);
-        builds(builds &c);
+        builds(const builds &c);
         virtual ~builds();
 
         int getDurability() const;

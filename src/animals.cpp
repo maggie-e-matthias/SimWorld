@@ -1,7 +1,7 @@
 
 #include <iostream>
 #include <string>
-#include "animals.h"
+#include "include/animals.h"
 
 using namespace std;
 
@@ -29,7 +29,7 @@ rabbit::rabbit(const rabbit& c)
 rabbit::~rabbit() {
 }
 
-void rabbit::getAction() {
+void rabbit::getAction() const {
     cout << "The rabbit is moving around the island." << endl;
 }
 
@@ -64,7 +64,7 @@ goat::goat(const goat& c)
 goat::~goat() {
 }
 
-void goat::getAction() {
+void goat::getAction() const{
     cout << "The goat is grazing on the island." << endl;
 }
 
@@ -100,7 +100,7 @@ pig::pig(const pig& c)
 pig::~pig() {
 }
 
-void pig::getAction() {
+void pig::getAction() const {
     cout << "The pig is searching for food on the island." << endl;
 }
 
