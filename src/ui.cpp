@@ -1,9 +1,4 @@
 #include "include/ui.h"
-#include <iostream>
-#include <string> 
-#include <iomanip>
-#include <cctype>
-using namespace std;
 
 // Handles char input and validates it as well, all compacted in one line
 // A parameter of type string was used for bounds to accept input of either on single possibility
@@ -26,6 +21,7 @@ char UI::getFromUserChar(string bounds, int size){
     return toupper(Choice);
 }
 
+// Handles non-zero and non-negative numeric values
 int UI::getFromUserNum(){
     int input; 
     cout << "Enter a number please: ";
@@ -35,9 +31,21 @@ int UI::getFromUserNum(){
     return input;
 }
 
-void UI::printTitleScreen(){
-    cout << "------ Survivor Island Simulator ------" << endl;
-    cout << "-------------- Start[S] ---------------" << endl;
+
+void UI::printTurnStats(vector<simEntity*> world){
+    // Supposed to print out all intites in the world with 
+    // the option of inspecting one of them
+    if(world.empty()){
+        cout << "World is currently empty, might wanna start spawining things" << endl;
+    }
+    else{
+        cout << left << setw(4) << "ID" << setw(15) << "Name" << setw(10) << "Status" << endl;
+        for(int i = 0, n = world.size(); i < n; i++ ){
+            cout << left << setw(4) << world[i]->getID() 
+            << setw(15) << world[i]->getName() << setw(20);
+            cout << (world[i]->getisActive()? "Active" : "Inactive") << endl;
+        }
+    }
 }
 
 void UI::printCreationOptions(){

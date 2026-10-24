@@ -2,7 +2,10 @@
 #include <string> 
 #include <ctime>
 #include <iomanip>
+#include <cctype>
 using namespace std;
+
+#include "base.h"
 
 // UI has been implemented as a class to encapsulate all functions called during the loop
 // and separate them from the logic of the loop
@@ -13,11 +16,8 @@ class UI{
         char getFromUserChar(string, int); // Validates char input and makes sure its within bounds
         int getFromUserNum();
 
-        // Start Menu
-        void printTitleScreen();
-
         // Per Turn Options
-        void printTurnStats();
+        void printTurnStats(vector<simEntity*>);
         void printCreationOptions();
         void printInteractionOptions(); 
 
