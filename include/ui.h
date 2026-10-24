@@ -8,13 +8,10 @@ using namespace std;
 // and separate them from the logic of the loop
 
 class UI{
-    private:
-        char choiceInput; // For choosing between options
-        int numericInput; // For getting a numeric input
     public:
         // Basic in every other method
-        void getFromUserChar();
-        void getFromUserNum();
+        char getFromUserChar(string, int); // Validates char input and makes sure its within bounds
+        int getFromUserNum();
 
         // Start Menu
         void printTitleScreen();
