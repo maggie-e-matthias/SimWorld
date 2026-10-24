@@ -129,12 +129,14 @@ int living::getMaxHungerLevel() const {
 // Constructors & Destructor
 
 template <int N>
-builds<N>::builds(string name, bool isActive,int durability, int maxDurability, int upgradeLevel, item buildRequirements[]): simEntity(name, isActive), durability(durability), maxDurability(maxDurability), upgradeLevel(upgradeLevel), buildRequirements(buildRequirements) {
+builds<N>::builds(string name, bool isActive,int durability, int maxDurability, int upgradeLevel, item buildRequirements[], item upgradeRequirements): simEntity(name, isActive),
+ durability(durability), maxDurability(maxDurability), upgradeLevel(upgradeLevel), buildRequirements(buildRequirements), upgradeRequirements(upgradeRequirements) {
     cout << "Build entity created" << endl;
 }
 
 template <int N>
-builds<N>::builds(const builds &c): simEntity(c), durability(c.durability), maxDurability(c.maxDurability), upgradeLevel(c.upgradeLevel) {
+builds<N>::builds(const builds &c): simEntity(c), durability(c.durability), maxDurability(c.maxDurability), upgradeLevel(c.upgradeLevel),
+    buildRequirements(c.buildRequirements), upgradeRequirements(c.upgradeRequirements) {
     cout << "Build entity created" << endl;
 }
 
@@ -156,7 +158,7 @@ void builds<N>::setDurability(int durability) {
 }
 
 template <int N>
-int builds<N>::getMaxDurability() const {
+int builds<N>::getMaxDurability() const{
     return maxDurability;
 }
 

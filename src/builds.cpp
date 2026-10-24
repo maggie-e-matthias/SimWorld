@@ -11,6 +11,7 @@ using namespace std;
 template <int N>
 hut<N>::hut(string name, bool isActive, int durability, int maxDurability): builds(name, isActive, durability, maxDurability) {
     this->buildRequirements[] = {item::WOOD, item::STONE}; // list of materials required to finish making the building
+    this->upgradeRequirements = item::STONE;
     cout << "Hut created" << endl;
 }
 
@@ -49,6 +50,7 @@ int hut<N>::getMaxBeds() const{
 template <int N>
 fence<N>::fence(string name, bool isActive, int durability, int maxDurability): builds(name, isActive, durability, maxDurability) {
     this->buildRequirements[] = {item::WOOD, item::WOOD};
+    this->upgradeRequirements = item::METAL;
     cout << "Fence created" << endl;
 }
 
@@ -66,6 +68,7 @@ fence<N>::~fence() {
 template <int N>
 farm<N>::farm(string name, bool isActive, int durability, int maxDurability): builds(name, isActive, durability, maxDurability) {
     this->buildRequriements[] = {item::WOOD, item::WATER, item::STONE};
+    this->upgradeRequirements = item::WATER;
     cout << "Farm created" << endl;
 }
 
@@ -82,6 +85,7 @@ farm<N>::~farm() {
 template <int N>
 storage<N>::storage(string name, bool isActive, int durability, int maxDurability, int maxStorageSpace): builds(name, isActive, durability, maxDurability), maxStorageSpace {
     this->buildRequirements[] = {item::LEATHER, item::WOOD, item::METAL};
+    this->upgradeRequirements = item::METAL;
     cout << "Storage created" << endl;
 }
 
@@ -152,6 +156,7 @@ item storage<N>::getFromStorage(item I){
 template <int N>
 animalPen<N>::animalPen(string name, bool isActive, int durability, int maxDurability): builds(name, isActive, durability, maxDurability) {
     this->buildRequirements[] = {item::WOOD, item::STONE, item::LEATHER};
+    this->upgradeRequirements = item::STONE;
     cout << "Animal Pen created" << endl;
 }
 

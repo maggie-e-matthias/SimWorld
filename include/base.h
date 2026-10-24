@@ -1,4 +1,4 @@
-#pragma once 
+#pragma once // To solve the issue of multiple includes
 
 #include <iostream>
 #include <string>
@@ -75,8 +75,10 @@ class builds: public simEntity{
         int maxDurability;
         int upgradeLevel;
         item buildRequirements[N]; // Array of required resources to create the build
+        item upgradeRequirements;
     public: 
-        builds<N>(string name = "New Build", bool isActive = true, int durability = 100, int maxDurability = 100, int upgradeLevel = 1, item buildRequirements[N] = {item::WOOD});
+        builds<N>(string name = "New Build", bool isActive = true, int durability = 100, int maxDurability = 100, int upgradeLevel = 1,
+             item buildRequirements[N] = {item::WOOD}, item upgradeRequirements = item::WOOD);
         builds<N>(const builds &c);
         virtual ~builds();
 

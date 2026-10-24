@@ -1,4 +1,4 @@
-#pragma once
+#pragma once // To solve the issue of multiple includes
 
 #include <iostream>
 #include <string>
