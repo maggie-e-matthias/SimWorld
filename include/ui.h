@@ -1,15 +1,20 @@
 #include <iostream>
 #include <string> 
+#include <ctime>
+#include <iomanip>
+using namespace std;
 
+// UI has been implemented as a class to encapsulate all functions called during the loop
+// and separate them from the logic of the loop
 
 class UI{
     private:
-        char choiceInput;
-        int numericInput;
+        char choiceInput; // For choosing between options
+        int numericInput; // For getting a numeric input
     public:
         // Basic in every other method
-        void getFromUser(char);
-        void getFromUser(int);
+        void getFromUserChar();
+        void getFromUserNum();
 
         // Start Menu
         void printTitleScreen();
@@ -21,5 +26,8 @@ class UI{
 
         // End of each SimDay stats
         void printDailyStats();
+
+        void setchoiceInput(char);
+        void setnumericInput(int);
 
 };
