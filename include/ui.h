@@ -5,8 +5,9 @@
 #include <cctype>
 using namespace std;
 
-#include "base.h"
-
+#include "survivors.h"
+#include "builds.h"
+#include "animals.h"
 // UI has been implemented as a class to encapsulate all functions called during the loop
 // and separate them from the logic of the loop
 
@@ -22,9 +23,6 @@ class UI{
         void printInteractionOptions(); 
 
         // End of each SimDay stats
-        void printDailyStats();
-
-        void setchoiceInput(char);
-        void setnumericInput(int);
+        void printDailyStats(vector<simEntity*>);
 
 };

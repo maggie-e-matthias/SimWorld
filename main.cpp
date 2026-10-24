@@ -158,7 +158,7 @@ int main(){
         }
         }while(moreTurns);
 
-        //ui.printDailyStats();
+        ui.printDailyStats(World);
         cout << "Want to proceed to next day? [Y/N]"; 
         Choice = ui.getFromUserChar("YN", 2);
         if(Choice == 'N'){
