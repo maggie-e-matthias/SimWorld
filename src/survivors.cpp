@@ -11,11 +11,13 @@ using namespace std;
 // Attributes inherited from living class (e.g. health level, hunger level, etc..) are set to their default values
 // that are listed in base.h, since the survivors do work with these particular values (like maxHealthLevel = 100 not less),
 // these values will not be overridden
-survivor::survivor(string name, bool isActive, int maxInventorySize): living(name, isActive), XPLevel(0), maxInventorySize(maxInventorySize) {
+survivor::survivor(string name, bool isActive, int maxInventorySize):
+living(name, isActive), XPLevel(0), maxInventorySize(maxInventorySize) {
     cout << "Survivor created" << endl;
 }
 
-survivor::survivor(const survivor &c): living(c), XPLevel(c.XPLevel), maxInventorySize(c.maxInventorySize) {
+survivor::survivor(const survivor &c): living(c), 
+XPLevel(c.XPLevel), maxInventorySize(c.maxInventorySize) {
     cout << "Survivor created" << endl;
 }
 
@@ -35,9 +37,11 @@ void survivor::setXPLevel(int XPLevel) {
 
 // Other methods 
 void survivor::getAction() const {
-    // Still unsure of what the implementation should be
-    // Perhaps (somehow) return the action they have done for
-    // this turn
+    cout << "A helpless person trying to stay alive" << endl;
+}
+
+simEntity* survivor::clone() const{
+    return new survivor(*this);
 }
 
 // Inventory methods
@@ -134,6 +138,11 @@ void doctor::makeMeds(){
     setXPLevel(getXPLevel() + 5); // Increase XP level for making meds
 }
 
+void doctor::getAction() const {
+    cout << "Other survivor's lives are counting on this fellow" << endl;
+}
+
+
 // Scout survivor
 
 // Constructors & Destructor
@@ -149,7 +158,6 @@ scout::scout(const scout &c): survivor(c) {
 }
 
 scout::~scout() {
-    survivor::~survivor();
     cout << "Scout destroyed" << endl;
 }
 
@@ -159,6 +167,11 @@ void scout::gatherResources() {
     // Increases sources in their inventory
     setXPLevel(getXPLevel() + 10); // Increase XP level for gathering resources
 }
+
+void scout::getAction() const {
+    cout << "Those camping skills did not go to waste after all" << endl;
+}
+
 
 // Engineer survivor
 
@@ -190,6 +203,11 @@ void engineer::repair() {
     // Has to use less material than build
 }
 
+void engineer::getAction() const {
+    cout << "Thinking about how to optimize this whole camp" << endl;
+}
+
+
 // Farmer survivor
 farmer::farmer(string name, bool isActive): survivor(name, isActive) {
     cout << "Farmer created" << endl;
@@ -218,6 +236,10 @@ void farmer::growCrops() {
     setXPLevel(getXPLevel() + 10);
 }
 
+void farmer::getAction() const {
+    cout << "Perhaps the island isn't that different from a farm, except for those pesky animals" << endl;
+}
+
 // Hunter survivor
 
 hunter::hunter(string name, bool isActive): survivor(name, isActive) {
@@ -244,6 +266,11 @@ void hunter::fendOff() {
     setHealthLevel(getHealthLevel() - 5); 
     setXPLevel(getXPLevel() + 15);
 }
+
+void hunter::getAction() const{
+    cout << "Hunting isn't a hobby here, it's a lifestyle" << endl;
+}
+
 simEntity* doctor::clone() const {
     return new doctor(*this);
 }
