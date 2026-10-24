@@ -10,10 +10,9 @@ using namespace std;
 // survivors to breed 
 class animal: public living{
     private:
-    
+        vector<item> resources;
     public:
-    string* resources[3];
-        animal();
+        animal(string name = "New Animal", bool isActive = true, vector<item> resources = {item::MEAT});
         animal(const animal &c);
         virtual ~animal();
         
@@ -28,13 +27,13 @@ class rabbit: public animal{
     private:
     vector<string> resources;
     public:
-        rabbit();
+        rabbit(string name = "New Rabbit", bool isActive = true);
         rabbit(const rabbit &c);
         virtual ~rabbit();
 
-        void dropResources();
+        void dropResources() override;
         void getAction() const override;
-       simEntity* clone() const override ;
+        simEntity* clone() const override ;
 
 
 }; 
@@ -44,11 +43,11 @@ class goat: public animal{
     private:
     vector<string> resources;
     public:
-        goat();
+        goat(string name = "New Goat", bool isActive = true);
         goat(const goat &c);
         virtual ~goat();
         
-        void dropResources();
+        void dropResources() override;
         void getAction() const override;
         simEntity* clone() const override ;
 }; 
@@ -58,11 +57,11 @@ class pig: public animal{
     private:
     vector<string> resources;
     public:
-        pig();
+        pig(string name = "New Pig", bool isActive = true);
         pig(const pig &c);
         virtual ~pig();
 
-        void dropResources();
+        void dropResources() override;
         void getAction() const override;
         simEntity* clone() const override ;
 };

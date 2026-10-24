@@ -1,13 +1,10 @@
-
-#include <iostream>
-#include <string>
 #include "include/animals.h"
 
 using namespace std;
 
 // ANIMAL 
 
-animal::animal() : living() {
+animal::animal(string name, bool isActive, vector<item> resources) : living(name, isActive) {
 }
 
 animal::animal(const animal& c) : living(c) {
@@ -18,15 +15,15 @@ animal::~animal() {
 
 //  RABBIT
 
-rabbit::rabbit()
-    : animal(), resources({"meat", "fur"}) {
+rabbit::rabbit(string name, bool isActive): animal(name, isActive, {item::MEAT, item::LEATHER}){
+    cout << "Rabbit Spawned" << endl;
 }
 
-rabbit::rabbit(const rabbit& c)
-    : animal(c), resources(c.resources) {
+rabbit::rabbit(const rabbit& c):animal(c), resources(c.resources) {
 }
 
 rabbit::~rabbit() {
+    cout << "Rabbit Died" << endl;
 }
 
 void rabbit::getAction() const {
@@ -53,15 +50,15 @@ simEntity* rabbit::clone() const {
 
 
 // GOAT 
-goat::goat()
-    : animal(), resources({"meat", "milk", "hide"}) {
+goat::goat(string name, bool isActive):animal(name, isActive, {item::MEAT, item::MILK, item::LEATHER}){
+    cout << "Goat Spawned" << endl;
 }
 
-goat::goat(const goat& c)
-    : animal(c), resources(c.resources) {
+goat::goat(const goat& c): animal(c), resources(c.resources) {
 }
 
 goat::~goat() {
+    cout << "Goat Died" << endl;
 }
 
 void goat::getAction() const{
@@ -86,18 +83,17 @@ simEntity* goat::clone() const {
     return new goat(*this);
 }
 
-
 // PIG 
 
-pig::pig()
-    : animal(), resources({"meat", "fat", "hide"}) {
+pig::pig(string name, bool isActive):animal(name, isActive, {item::MEAT, item::MEAT, item::LEATHER}){
+    cout << "Pig Spawned" << endl;
 }
 
-pig::pig(const pig& c)
-    : animal(c), resources(c.resources) {
+pig::pig(const pig& c): animal(c), resources(c.resources) {
 }
 
 pig::~pig() {
+    cout << "Pig Died" << endl;
 }
 
 void pig::getAction() const {
