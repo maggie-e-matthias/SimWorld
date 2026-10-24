@@ -60,6 +60,10 @@ void simEntity::setDaysLasted(int days) {
     this->daysItLasted = days;
 }
 
+void simEntity::setIDForUndo(int id) {
+    ID = id;
+}
+
 
 // Living 
 
@@ -128,18 +132,17 @@ int living::getMaxHungerLevel() const {
 
 // Constructors & Destructor
 
-builds::builds(int durability, int maxDurability, int upgradeLevel)
-    : simEntity(),
-      durability(durability),
-      maxDurability(maxDurability),
-      upgradeLevel(upgradeLevel) {
 
+builds::builds(string name, bool isActive,int durability, int maxDurability, vector<item> buildRequirements, item upgradeRequirements, vector<string> features): simEntity(name, isActive),
+ durability(durability), maxDurability(maxDurability), upgradeLevel(1), buildRequirements(buildRequirements), upgradeRequirements(upgradeRequirements), features(features)  {
     cout << "Build entity created" << endl;
 }
 
-builds::builds(const builds &c): simEntity(c), durability(c.durability), maxDurability(c.maxDurability), upgradeLevel(c.upgradeLevel) {
+builds::builds(const builds &c): simEntity(c), durability(c.durability), maxDurability(c.maxDurability), upgradeLevel(c.upgradeLevel),
+    buildRequirements(c.buildRequirements), upgradeRequirements(c.upgradeRequirements) {
     cout << "Build entity created" << endl;
 }
+
 
 builds::~builds() {
     cout << "Build entity destroyed" << endl;
@@ -155,13 +158,13 @@ void builds::setDurability(int durability) {
     this->durability = durability;
 }
 
-int builds::getMaxDurability() const {
+int builds::getMaxDurability() const{
     return maxDurability;
 }
 
-// void builds::setMaxDurability(int maxDurability) {
-//     this->maxDurability = maxDurability;
-// }
+void builds::setMaxDurability(int maxDurability) {
+    this->maxDurability = maxDurability;
+}
 
 int builds::getUpgradeLevel() const {
     return upgradeLevel;
@@ -170,6 +173,4 @@ int builds::getUpgradeLevel() const {
 void builds::setUpgradeLevel(int upgradeLevel) {
     this->upgradeLevel = upgradeLevel;
 }
-void simEntity::setIDForUndo(int id) {
-    ID = id;
-}
+

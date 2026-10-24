@@ -1,5 +1,4 @@
-
-#pragma once
+#pragma once // To solve the issue of multiple includes
 
 #include <iostream>
 #include <string>
@@ -70,31 +69,37 @@ public:
     int getMaxHungerLevel() const;
 };
 
-// Base class for buildings
-class builds : public simEntity {
-private:
-    int durability;
-    const int maxDurability;
-    int upgradeLevel;
+// Builds class, contains all buildings survivors can make, 
+// only on condition they have enough resources to build them, plus it invokes build and repair events
 
-public:
-   builds(int durability = 100, int maxDurability = 100,
-       int upgradeLevel = 0);
+class builds: public simEntity{
+    private:
+        int durability;
+        int maxDurability;
+        int upgradeLevel;
+        vector<item> buildRequirements; // Array of required resources to create the build
+        item upgradeRequirements;
+        vector<string> features;
+    public: 
+        builds(string name = "New Build", bool isActive = true, int durability = 100, int maxDurability = 100,
+             vector<item> buildRequirements = {item::WOOD}, item upgradeRequirements = item::WOOD, vector<string> features = {"Just a build"});
+        builds(const builds &c);
+        virtual ~builds();
 
-    builds(const builds& c);
-    virtual ~builds();
-
-    int getDurability() const;
-    void setDurability(int durability);
-
-    int getMaxDurability() const;
-
-    int getUpgradeLevel() const;
-    void setUpgradeLevel(int upgradeLevel);
+        int getDurability() const;
+        void setDurability(int);
+        int getMaxDurability() const;
+        void setMaxDurability(int); // Max durabitlity is modifiable as it can increase with upgrades
+        int getUpgradeLevel() const;
+        void setUpgradeLevel(int);
 };
 
-// Resource items
-enum class item {
-    WATER, FRUITS, COCONUTS, MEAT, FISH,
-    MEDS, WOOD, LEATHER, METAL, STONE
-};
+
+/* --- Resource Items --- */
+
+/* Items have been defined explicitly as an enum class rather than a class since they are 
+   far simpler than needing a class of their own*/
+
+enum class item {NONE, WATER, FRUITS, COCONUTS, MEAT, FISH, MEDS, WOOD, LEATHER, METAL, STONE};
+
+
