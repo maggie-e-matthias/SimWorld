@@ -66,13 +66,15 @@ class living: public simEntity{ // Abstract base class
 // Builds class, contains all buildings survivors can make, 
 // only on condition they have enough resources to build them, plus it invokes build and repair events
 
+// A template of Non-type parameter N was used to allow an array of build requirements that
+// will vary in size depending on the building itself
 template <int N>
 class builds: public simEntity{
     private:
         int durability;
-        const int maxDurability;
+        int maxDurability;
         int upgradeLevel;
-        item buildRequirements[N];
+        item buildRequirements[N]; // Array of required resources to create the build
     public: 
         builds<N>(string name = "New Build", bool isActive = true, int durability = 100, int maxDurability = 100, int upgradeLevel = 1, item buildRequirements[N] = {item::WOOD});
         builds<N>(const builds &c);
@@ -81,7 +83,7 @@ class builds: public simEntity{
         int getDurability() const;
         void setDurability(int);
         int getMaxDurability() const;
-        //void setMaxDurability(int);
+        void setMaxDurability(int); // Max durabitlity is modifiable as it can increase with upgrades
         int getUpgradeLevel() const;
         void setUpgradeLevel(int);
 };

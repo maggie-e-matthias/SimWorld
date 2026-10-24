@@ -4,14 +4,18 @@
 #include <vector>
 using namespace std;
 
+// Hut Class, where players sleep overnight to avoid getting health damage over time
+
+// Constructors and destructor
+
 template <int N>
 hut<N>::hut(string name, bool isActive, int durability, int maxDurability): builds(name, isActive, durability, maxDurability) {
-    this->buildRequirements[] = {item::WOOD, item::STONE};
+    this->buildRequirements[] = {item::WOOD, item::STONE}; // list of materials required to finish making the building
     cout << "Hut created" << endl;
 }
 
 template <int N>
-hut<N>::hut(hut<N> &c): builds(c) {
+hut<N>::hut(const hut<N> &c): builds(c) {
     cout << "Hut created" << endl;
 }
 
@@ -20,6 +24,28 @@ hut<N>::~hut() {
     cout << "Hut destroyed" << endl;
 }
 
+// Getters and setters 
+
+template <int N>
+int hut<N>::getNoOfBeds()const{
+    return noOfBeds;
+}
+
+template <int N>
+void hut<N>::setNoOFBeds(int beds){
+    noOFBeds = beds;
+}
+
+template <int N>
+int hut<N>::getMaxBeds() const{
+    return maxBeds;
+}
+
+
+// Fence class, the main build that protects survivors from outside dangers
+
+// Constructors and Destructors
+
 template <int N>
 fence<N>::fence(string name, bool isActive, int durability, int maxDurability): builds(name, isActive, durability, maxDurability) {
     this->buildRequirements[] = {item::WOOD, item::WOOD};
@@ -27,9 +53,10 @@ fence<N>::fence(string name, bool isActive, int durability, int maxDurability): 
 }
 
 template <int N>
-fence<N>::fence(fence<N> &c): builds(c) {
+fence<N>::fence(const fence<N> &c): builds(c) {
     cout << "Fence created" << endl;
 }
+
 
 template <int N>
 fence<N>::~fence() {
@@ -43,7 +70,7 @@ farm<N>::farm(string name, bool isActive, int durability, int maxDurability): bu
 }
 
 template <int N>
-farm<N>::farm(farm<N> &c): builds(c) {
+farm<N>::farm(const farm<N> &c): builds(c) {
     cout << "Farm created" << endl;
 }
 
@@ -59,7 +86,7 @@ storage<N>::storage(string name, bool isActive, int durability, int maxDurabilit
 }
 
 template <int N>
-storage<N>::storage(storage<N> &c): builds(c) {
+storage<N>::storage(const storage<N> &c): builds(c) {
     cout << "Storage created" << endl;
 }
 
@@ -129,7 +156,7 @@ animalPen<N>::animalPen(string name, bool isActive, int durability, int maxDurab
 }
 
 template <int N>
-animalPen<N>::animalPen(animalPen<N> &c): builds(c) {
+animalPen<N>::animalPen(const animalPen<N> &c): builds(c) {
     cout << "Animal Pen created" << endl;
 }
 
