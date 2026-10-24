@@ -6,6 +6,13 @@
 
 using namespace std;
 
+/* --- Resource Items --- */
+
+/* Items have been defined explicitly as an enum class rather than a class since they are 
+   far simpler than needing a class of their own*/
+
+enum class item {NONE, WATER, FRUITS, COCONUTS, MEAT, FISH, MEDS, WOOD, LEATHER, METAL, STONE};
+
 // Base class for all entities
 class simEntity {
 private:
@@ -95,11 +102,5 @@ class builds: public simEntity{
 };
 
 
-/* --- Resource Items --- */
-
-/* Items have been defined explicitly as an enum class rather than a class since they are 
-   far simpler than needing a class of their own*/
-
-enum class item {NONE, WATER, FRUITS, COCONUTS, MEAT, FISH, MEDS, WOOD, LEATHER, METAL, STONE};
 
 
