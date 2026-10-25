@@ -217,10 +217,12 @@ int main(){
                 case 'D':
                     // Prints out duplication messages
                     // But only if there are any entities to begin with
+                    ui.duplicateEntity(World);
                     break;
                 case 'R': 
                     // Prints out deletion messages
                     // But only if there are any entities to begin with
+                    
                     break;
                 case 'I': 
                     // Prints out available interactions
