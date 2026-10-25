@@ -86,35 +86,57 @@ void UI::createEntity(vector<simEntity*>& world, UndoManager& undo) {
     cout << "\nCreate: Survivor[S], Animal[A], Build[B], Cancel[C]\n";
     char group = getFromUserChar("SABC", 4);
     if (group == 'C') return;
-    cout << "Enter a name (one line): ";
+
     string name;
-    getline(cin, name);
-    if (name.empty()) name = "New Entity";
+
+    cout << "\nDefault[D], Custom[C]\n";
+    char choice = getFromUserChar("DC", 2);
+
+    if(choice == 'C'){
+        cout << "Enter a name (one line): ";
+        getline(cin, name);
+    }
+
+
 
     simEntity* created = nullptr;
     if (group == 'S') {
         cout << "Regular[R], Doctor[D], Scout[S], Farmer[F], Engineer[E], Hunter[H]\n";
         char type = getFromUserChar("RDSFEH", 6);
-        if (type == 'R') created = new survivor(name);
-        else if (type == 'D') created = new doctor(name);
-        else if (type == 'S') created = new scout(name);
-        else if (type == 'F') created = new farmer(name);
-        else if (type == 'E') created = new engineer(name);
-        else if (type == 'H') created = new hunter(name);
+        if (type == 'R' and choice == 'C') created = new survivor(name);
+        else if (type == 'D' and choice == 'C') created = new doctor(name);
+        else if (type == 'S' and choice == 'C') created = new scout(name);
+        else if (type == 'F' and choice == 'C') created = new farmer(name);
+        else if (type == 'E' and choice == 'C') created = new engineer(name);
+        else if (type == 'H' and choice == 'C') created = new hunter(name);
+        else if (type == 'R' and choice == 'D') created = new survivor();
+        else if (type == 'D' and choice == 'D') created = new doctor();
+        else if (type == 'S' and choice == 'D') created = new scout();
+        else if (type == 'F' and choice == 'D') created = new farmer();
+        else if (type == 'E' and choice == 'D') created = new engineer();
+        else if (type == 'H' and choice == 'D') created = new hunter();
     } else if (group == 'A') {
         cout << "Rabbit[R], Goat[G], Pig[P]\n";
         char type = getFromUserChar("RGP", 3);
-        if (type == 'R') created = new rabbit(name);
-        else if (type == 'G') created = new goat(name);
-        else if (type == 'P') created = new pig(name);
+        if (type == 'R' and choice == 'C') created = new rabbit(name);
+        else if (type == 'G' and choice == 'C') created = new goat(name);
+        else if (type == 'P' and choice == 'C') created = new pig(name);
+        else if (type == 'R' and choice == 'D') created = new rabbit();
+        else if (type == 'G' and choice == 'D') created = new goat();
+        else if (type == 'P' and choice == 'D') created = new pig();
     } else {
         cout << "Hut[H], Fence[F], Storage[S], Farm[R], Animal pen[P]\n";
         char type = getFromUserChar("HFSRP", 5);
-        if (type == 'H') created = new hut(name);
-        else if (type == 'F') created = new fence(name);
-        else if (type == 'S') created = new storage(name);
-        else if (type == 'R') created = new farm(name);
-        else if (type == 'P') created = new animalPen(name);
+        if (type == 'H' and choice == 'C') created = new hut(name);
+        else if (type == 'F' and choice == 'C') created = new fence(name);
+        else if (type == 'S' and choice == 'C') created = new storage(name);
+        else if (type == 'R' and choice == 'C') created = new farm(name);
+        else if (type == 'P' and choice == 'C') created = new animalPen(name);
+        else if (type == 'H' and choice == 'D') created = new hut();
+        else if (type == 'F' and choice == 'D') created = new fence();
+        else if (type == 'S' and choice == 'D') created = new storage();
+        else if (type == 'R' and choice == 'D') created = new farm();
+        else if (type == 'P' and choice == 'D') created = new animalPen();
     }
 
     if (created) {
