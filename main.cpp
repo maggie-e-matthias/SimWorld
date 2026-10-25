@@ -1,7 +1,10 @@
 /*
     Authors: 
-    - Magdoleen Matthias 900152595
+    - Magdoleen Matthias 900251595
     - Hanan Elnakeeb 900253826
+
+    GitHub Repo link(for documentation purposes):
+    https://github.com/maggie-e-matthias/SimWorld.git
 
         ------ Survivor Island Simulator ------
     Could you survive for the longest time possible without killing
@@ -16,7 +19,59 @@
         board of all game stats, then they're asked whether they want to proceed to the following day or quit the game
 
     Class Design overview:
+
+        
     Features:
+        F1 Diverse Entities
+            There are about 14 Unique Entities that can be instantiaded in the sim, and 
+
+        F2 Creating Entites
+            Functions in the UI class (that handle printing out interface and access the backend as well) provide the option
+            to create any of the 14 entities, supposedly with the option of using defualt values and custom values
+            (Both parameterized and default constructors have been implemented using the defualt parameters as arguments(in order to avoid repition), 
+            if provided, then entity can be created with custom parameters, if not, defualt values are used)
+
+        F3 Duplicating Entities
+            This process calls the "clone" function of target entity, which in turn calls the deep copy constructor, 
+            the ID practically can never be duplicated as the constructor itself generates a unique ID based on static memeber count
+
+        F4 Running the Sim
+            Once the simulation starts, the user can take a certain number of turns per a game day, after the turns end, 
+            they're asked if they want to take more turns, if so, they get to take some more, if not, the day ends and they get a 
+            board of all game stats, then they're asked whether they want to proceed to the following day or quit the game
+            This is done by making a day loop and an inner turn loop, the inner turn loop itself has a while loop to see whether the user
+            wants to take more turns FOR THAT DAY. All entities are stored in one World vector of type simEntity*
+
+        F5 Special Capabilities
+            Survivors in particular have special abilities for each kind, e.g. doctors can heal other survivors, engineers can make builds and repairs
+
+        F6 Event Queue
+            A special template queue class was implemented to handle this situation, and a derived event manager (that has an event
+            queue object inside) was implmented to hold pending events
+
+        F7 Undo
+            A special template stack class was created and a derived Undo record class was implemented with
+            attributes and methods to handle undos 
+
+        F8 Data Structures
+            Instead of #include<Stack> and #include<Queue>, we implemented our own template classes for it in the 
+            include directory
+
+        F9 Console interface
+            Some of the messages printed to user were implemented in main, more complex ones (especially ones that directly deal
+            with the world itself) were implemented in thier own UI class, where functions and some utility functions (such as the one for finding the 
+            index corresponding to a certian ID) were incapsulated in this class for ease of use
+
+        F10 Memory Safety
+            At the end of sim, every enitiy in the world is deleted, and the world vector itself is cleared afterwards
+
+        F11 Special feature: 
+            At the end of each game day, the user gets an overview of their world stats, 
+            in this case the number of survivors, number of builds, number of animals, and most importantly;
+            Their own XP level (which is the total level of XP of all survivors ever created)
+            and Their camp level (which is the total level of upgradeLevel of all builds ever created as well), 
+            this gives the user a sense of acomplishment and progress while playing 
+    
     Insructions for running: 
         Running requirements: CMake v3.16 or higher, MinGW as your compiler
 
@@ -24,7 +79,7 @@
             /include
             /src
             CMakeLists.txt
-            simulation.cpp (which is supposedly our main file)
+            main.cpp
         
         So, 
 
@@ -59,6 +114,8 @@
                 .\sim
                 ```
     AI usage:
+
+        https://claude.ai/share/aeb69181-202c-464d-b15e-ba6033c9cf6c
 
 */
 
@@ -165,6 +222,13 @@ int main(){
             GameOn = false;
         }
     }
+
+    // Delete all remaining entities
+    for (int i = 0, n = World.size(); i < n; i++) {
+        delete World[i];
+        World[i] = nullptr;
+    }
+    World.clear();
 
     cout << "\n**Thank you for playing**\n" << endl;
 
