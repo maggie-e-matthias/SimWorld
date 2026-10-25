@@ -232,7 +232,7 @@ int main(){
                     break;
                 case 'U':
                     // Undoes last action if any
-                    undo.undo(World, count);
+                    undo.undo(World);
                     break;
             }
             // Must ask if user needs more turns before the day is over

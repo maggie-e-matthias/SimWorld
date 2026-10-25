@@ -2,6 +2,7 @@
 #pragma once
 
 #include <iostream>
+#include <vector>
 #include "base.h"
 #include "stack.h"
 
@@ -40,5 +41,5 @@ public:
     void recordDeleted(int index, simEntity* entity);
     void recordModified(int index, simEntity* entity);
 
-    bool undo(simEntity* entities[], int& count);
+    bool undo(vector<simEntity*>);
 };

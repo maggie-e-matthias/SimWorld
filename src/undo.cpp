@@ -62,7 +62,7 @@ void UndoManager::recordModified(int index, simEntity* entity) {
     }
 }
 
-bool UndoManager::undo(simEntity* entities[], int& count) {
+bool UndoManager::undo(vector<simEntity*> entities) {
     UndoRecord* record;
 
     if (!undoStack.peek(record)) {
@@ -74,57 +74,43 @@ bool UndoManager::undo(simEntity* entities[], int& count) {
 
     // this is to undo creating or duplicating an entity
     if (record->action == "create") {
-        if (index < 0 || index >= count) {
+        if (index < 0 || index >= (int)entities.size()) {
             cout << "Cannot undo: entity position is invalid."
                  << endl;
             return false;
         }
 
         delete entities[index];
-
-        // to move the remaining entities one position left
-        for (int i = index; i < count - 1; i++) {
-            entities[i] = entities[i + 1];
-        }
-
-        count--;
-        entities[count] = nullptr;
+        entities.erase(entities.begin() + index);
 
         cout << "Creation/duplication undone." << endl;
     }
 
     // this is to undo deleting an entity
     else if (record->action == "delete") {
-        if (count >= WORLD_CAPACITY) {
+        if ((int)entities.size() >= WORLD_CAPACITY) {
             cout << "Cannot undo: the world is full." << endl;
             return false;
         }
 
-        if (index < 0 || index > count) {
-            cout << "Cannot undo: entity position is invalid."
-                 << endl;
+        if (index < 0 || index > (int)entities.size()) {
+            cout << "Cannot undo: entity position is invalid." << endl;
             return false;
         }
 
-        // this is to move entities right to make room
-        for (int i = count; i > index; i--) {
-            entities[i] = entities[i - 1];
-        }
 
         // this is to restore a copy of the saved entity
+        entities.insert(entities.begin() + index , nullptr);
         entities[index] = record->snapshot->clone();
         entities[index]->setIDForUndo(record->originalID);
-
-        count++;
 
         cout << "Deletion undone." << endl;
     }
 
     // this is to undo modifying an entity
     else if (record->action == "modify") {
-        if (index < 0 || index >= count) {
-            cout << "Cannot undo: entity position is invalid."
-                 << endl;
+        if (index < 0 || index >= (int)entities.size()) {
+            cout << "Cannot undo: entity position is invalid." << endl;
             return false;
         }
 

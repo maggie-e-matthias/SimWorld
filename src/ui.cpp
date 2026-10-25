@@ -69,14 +69,14 @@ void UI::printCreationOptions(){
         cout << "\nRegular Survivor[R]" << "\nDoctor[D]" << "\nScout[S]" << "\nFarmer[F]"
         << "\nEngineer[E]" << "\nHunter[H]" << endl;
         Choice = getFromUserChar("RDSFEH", 6);
-        switch(Choice){
-            case 'R':
-            case 'D':
-            case 'S':
-            case 'F':
-            case 'E':
-            case 'H':
-        }
+        // switch(Choice){
+        //     case 'R':
+        //     case 'D':
+        //     case 'S':
+        //     case 'F':
+        //     case 'E':
+        //     case 'H':
+        // }
         break;
     case 'A':
         cout << "Animals: ";
