@@ -213,7 +213,7 @@ int main(){
             Choice = ui.getFromUserChar("NDRIU", 5);
             switch(Choice){
                 case 'N':
-                    ui.printCreationOptions();
+                    ui.printCreationOptions(World);
                     // Then proceeds to creation process no problems
                     break;
                 case 'D':

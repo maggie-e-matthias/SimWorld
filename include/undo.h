@@ -41,5 +41,5 @@ public:
     void recordDeleted(int index, simEntity* entity);
     void recordModified(int index, simEntity* entity);
 
-    bool undo(vector<simEntity*>);
+    bool undo(vector<simEntity*>&);
 };

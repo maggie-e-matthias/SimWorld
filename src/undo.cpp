@@ -62,7 +62,7 @@ void UndoManager::recordModified(int index, simEntity* entity) {
     }
 }
 
-bool UndoManager::undo(vector<simEntity*> entities) {
+bool UndoManager::undo(vector<simEntity*> & entities) {
     UndoRecord* record;
 
     if (!undoStack.peek(record)) {

@@ -21,20 +21,20 @@ class UI{
         int getFromUserNum();
 
         // Per Turn Options
-        void printTurnStats(vector<simEntity*>);
-        void printCreationOptions();
+        void printTurnStats(vector<simEntity*> &);
+        void printCreationOptions(vector<simEntity*> &);
         void printInteractionOptions(); 
 
         // Utility functions
-        int findID(int, vector<simEntity*>);
+        int findID(int, vector<simEntity*> &);
         //Acess to classes functions
 
-        void createEntity(vector<simEntity*>);
-        void duplicateEntity(vector<simEntity*>);
-        void deleteEntity(vector<simEntity*>);
-        void interactWithEntity(vector<simEntity*>);
+        void createEntityWparameters(vector<simEntity*> &, char, char);
+        void duplicateEntity(vector<simEntity*> &);
+        void deleteEntity(vector<simEntity*> &);
+        void interactWithEntity(vector<simEntity*> &);
 
         // End of each SimDay stats
-        void printDailyStats(vector<simEntity*>);
+        void printDailyStats(vector<simEntity*> &);
 
 };
