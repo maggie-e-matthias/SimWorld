@@ -19,6 +19,27 @@
         board of all game stats, then they're asked whether they want to proceed to the following day or quit the game
 
     Class Design overview:
+        The Class heirarchy in the sim is as follows: 
+            simEntity
+            |---living
+            |   |---survivor
+            |   |   |---doctor
+            |   |   |---hunter
+            |   |   |---scout
+            |   |   |---engineer
+            |   |   |---farmer
+            |   |  
+            |   |---animal
+            |       |---goat
+            |       |---pig
+            |       |---rabbit
+            |   
+            |---builds
+                |---hut
+                |---storage
+                |---fence
+                |---farm
+                |---animalPen
 
         
     Features:
@@ -114,8 +135,13 @@
                 .\sim
                 ```
     AI usage:
-
+    I acknowledge that I have used claude AI to: 
+    - Explain concepts in c++/cmake
+    - Help explain error messages and explain what could be causing the errors
+    - Help Debug errors in the program
         https://claude.ai/share/aeb69181-202c-464d-b15e-ba6033c9cf6c
+
+    As well as partially using inline suggestions by GitHub Copilot in VS Code
 
 */
 
