@@ -166,11 +166,12 @@ int main(){
     UI ui; 
     vector<simEntity*> World; // The container for all entities
     //Stack<vector<simEntity*>> History; // For undo purposes
-    
-    EventManager manager;
+    EventManager events;
+    UndoManager undo; 
 
     // Initialize all variables
     int inGameDays = 0, currentTurns = 0, numChoice; // Last one is for numeric choices
+    int count = 0; // For managing undo's
     bool GameOn; // Flag for starting the game
     bool moreTurns = false; // Flag for taking more turns if user wants to
     char Choice; // For choosing from menu options
@@ -207,8 +208,9 @@ int main(){
             cout << "\nYou could: \n" << "Spawn a new Entity[N]\t"
             << "Duplicate an already existing one[D]\t" << "Remove an entity[R]" << endl;
             cout << "Or you can interact with any existing entity[I] " << endl;
+            cout << "Or you can undo last turns action[U]" << endl;
             cout << "\nWhat's your pick? >> "; 
-            Choice = ui.getFromUserChar("NDRI", 4);
+            Choice = ui.getFromUserChar("NDRIU", 5);
             switch(Choice){
                 case 'N':
                     ui.printCreationOptions();
@@ -222,11 +224,15 @@ int main(){
                 case 'R': 
                     // Prints out deletion messages
                     // But only if there are any entities to begin with
-                    
+
                     break;
                 case 'I': 
                     // Prints out available interactions
                     // But only if there are entities to begin with
+                    break;
+                case 'U':
+                    // Undoes last action if any
+                    undo.undo(World, count);
                     break;
             }
             // Must ask if user needs more turns before the day is over
