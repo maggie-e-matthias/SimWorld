@@ -8,19 +8,29 @@ using namespace std;
 
 /* --- Resource Items --- */
 
-/* Items have been defined explicitly as an enum class rather than a class since they are 
-   far simpler than needing a class of their own*/
+/* Items have been defined explicitly as an enum class rather than a regular class since they are 
+   far simpler than needing a class of their own, it was also practical to use enums as to limit the resources
+   to certian predefined options
+*/
 
 enum class item {NONE, WATER, MILK, FRUITS, COCONUTS, MEAT, FISH, MEDS, WOOD, LEATHER, METAL, STONE};
 
-// Base class for all entities
+/* --- Classes --- */
+
+/* --- Base Class (Abstract) --- */
+/* Contains all the basic attributes and methods for all other inheriting class (entities classes), including:
+   - A unique ID implemented using a static member variable that counts for every entitiy created, hence every count is unique 
+   and cannot be repeated even for duplicate entities
+   - A name for the entity, which can either be predefined, or customized by the user
+   - A state of (in)Active
+*/
 class simEntity {
 private:
     static int count;
     int ID;
     string* name;
     bool isActive;
-    int daysItLasted;
+    int daysItLasted; // Um?
 
 public:
     simEntity(string name = "NPC", bool isActive = true);
@@ -44,29 +54,27 @@ public:
     void setIDForUndo(int id);
 };
 
-// Base class for living entities
+/* --- Living class (Abstract) --- */
+/* Contains all the attributes for all living creatures in the sim (survivors and animals), it inherits from simEntity and contains:
+   - Health level for the entity (and the maximum which is defined in the derived class based on the type of entity)
+   - A Hunger level (Same thing as health level)
+*/
 class living : public simEntity {
 private:
     int healthLevel;
     const int maxHealthLevel;
     int hungerlevel;
     const int maxHungerLevel;
-    bool isSick;
-
 public:
     living(string name = "NPC", bool isActive = true,
            int healthLevel = 100, int maxHealthLevel = 100,
-           int hungerLevel = 100, int maxHungerLevel = 100,
-           bool isSick = false);
+           int hungerLevel = 100, int maxHungerLevel = 100);
 
     living(const living& c);
     virtual ~living();
 
     int getHealthLevel() const;
     void setHealthLevel(int healthLevel);
-
-    bool getIsSick() const;
-    void setIsSick(bool isSick);
 
     int getMaxHealthLevel() const;
 
@@ -76,8 +84,17 @@ public:
     int getMaxHungerLevel() const;
 };
 
-// Builds class, contains all buildings survivors can make, 
-// only on condition they have enough resources to build them, plus it invokes build and repair events
+/* --- Builds Class (Abstract) --- */
+/* Provides the base for all the builds the user can make in the sim, on the condtion that:
+   1. There's at least one engineer survivor
+   2. There's enough build materials
+   It contains multiple attributes for the builds such as:
+   - A durability (like a bar going down when a long time passes on the build), and a max value that can 
+   be incremeneted as the build is upgraded
+   - An upgrade level
+   - A list of build requirements 
+   - A list of features it provides for the camp
+*/
 
 class builds: public simEntity{
     private:

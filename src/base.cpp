@@ -1,7 +1,5 @@
 #include "include/base.h"
-#include <iostream>
-#include <string>
-using namespace std;
+
 
 // Sim Entity
 
@@ -71,12 +69,12 @@ void simEntity::setIDForUndo(int id) {
 
 // Some values like health level, hunger level, etc, are set to default values (listed in header file)
 // that are only changed if the derived class requires otherwise
-living::living(string name, bool isActive, int healthLevel, int maxHealthLevel, int hungerLevel, int maxHungerLevel, bool isSick): simEntity(name, isActive), healthLevel(healthLevel), maxHealthLevel(maxHealthLevel), hungerlevel(hungerLevel), maxHungerLevel(maxHungerLevel), isSick(isSick) {
+living::living(string name, bool isActive, int healthLevel, int maxHealthLevel, int hungerLevel, int maxHungerLevel): simEntity(name, isActive), healthLevel(healthLevel), maxHealthLevel(maxHealthLevel), hungerlevel(hungerLevel), maxHungerLevel(maxHungerLevel){
     cout << "Living entity created" << endl;
     
 }
 
-living::living(const living &c): simEntity(c), healthLevel(c.healthLevel), maxHealthLevel(c.maxHealthLevel), hungerlevel(c.hungerlevel), maxHungerLevel(c.maxHungerLevel), isSick(c.isSick) {
+living::living(const living &c): simEntity(c), healthLevel(c.healthLevel), maxHealthLevel(c.maxHealthLevel), hungerlevel(c.hungerlevel), maxHungerLevel(c.maxHungerLevel){
     cout << "Living entity created" << endl;
 }
 
@@ -95,13 +93,6 @@ void living::setHealthLevel(int healthLevel) {
     this->healthLevel = healthLevel;
 }
 
-bool living::getIsSick() const {
-    return isSick;
-}
-
-void living::setIsSick(bool isSick) {
-    this->isSick = isSick;
-}
 
 int living::getMaxHealthLevel() const {
     return maxHealthLevel;
