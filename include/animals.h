@@ -1,8 +1,4 @@
 #pragma once
-
-#include <iostream>
-#include <string>
-#include <vector>
 #include "base.h"
 using namespace std;
 
@@ -12,7 +8,8 @@ class animal: public living{
     private:
         vector<item> resources;
     public:
-        animal(string name = "New Animal", bool isActive = true, vector<item> resources = {item::MEAT});
+        animal(string name = "New Animal", bool isActive = true, vector<item> resources = {item::MEAT}, 
+        int healthLevel = 100, int maxHealthLevel = 100, int hungerLevel = 100, int maxHungerLevel = 100);
         animal(const animal &c);
         virtual ~animal();
         
@@ -32,7 +29,7 @@ class rabbit: public animal{
         virtual ~rabbit();
 
         void dropResources() override;
-        void getAction() const override;
+        void getStats() const override;
         simEntity* clone() const override ;
 
 
@@ -48,7 +45,7 @@ class goat: public animal{
         virtual ~goat();
         
         void dropResources() override;
-        void getAction() const override;
+        void getStats() const override;
         simEntity* clone() const override ;
 }; 
 
@@ -62,6 +59,6 @@ class pig: public animal{
         virtual ~pig();
 
         void dropResources() override;
-        void getAction() const override;
+        void getStats() const override;
         simEntity* clone() const override ;
 };

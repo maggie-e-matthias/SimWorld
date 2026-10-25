@@ -36,7 +36,7 @@ void survivor::setXPLevel(int XPLevel) {
 }
 
 // Other methods 
-void survivor::getAction() const {
+void survivor::getStats() const {
     cout << "A helpless person trying to stay alive" << endl;
 }
 
@@ -138,7 +138,7 @@ void doctor::makeMeds(){
     setXPLevel(getXPLevel() + 5); // Increase XP level for making meds
 }
 
-void doctor::getAction() const {
+void doctor::getStats() const {
     cout << "Other survivor's lives are counting on this fellow" << endl;
 }
 
@@ -168,7 +168,7 @@ void scout::gatherResources() {
     setXPLevel(getXPLevel() + 10); // Increase XP level for gathering resources
 }
 
-void scout::getAction() const {
+void scout::getStats() const {
     cout << "Those camping skills did not go to waste after all" << endl;
 }
 
@@ -203,7 +203,7 @@ void engineer::repair() {
     // Has to use less material than build
 }
 
-void engineer::getAction() const {
+void engineer::getStats() const {
     cout << "Thinking about how to optimize this whole camp" << endl;
 }
 
@@ -236,7 +236,7 @@ void farmer::growCrops() {
     setXPLevel(getXPLevel() + 10);
 }
 
-void farmer::getAction() const {
+void farmer::getStats() const {
     cout << "Perhaps the island isn't that different from a farm, except for those pesky animals" << endl;
 }
 
@@ -267,7 +267,7 @@ void hunter::fendOff() {
     setXPLevel(getXPLevel() + 15);
 }
 
-void hunter::getAction() const{
+void hunter::getStats() const{
     cout << "Hunting isn't a hobby here, it's a lifestyle" << endl;
 }
 

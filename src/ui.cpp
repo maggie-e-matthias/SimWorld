@@ -2,8 +2,9 @@
 
 using namespace std;
 
-char UI::getFromUserChar(string bounds, int size) {
+char UI::getFromUserChar(string bounds) {
     char choice;
+    int size = bounds.size();
     while (true) {
         cout << "Enter your choice: ";
         if (!(cin >> choice)) {
@@ -56,12 +57,12 @@ void UI::printTurnStats(const vector<simEntity*>& world) {
              << (world[i]->getisActive() ? "Active" : "Inactive") << '\n';
     }
     cout << "Inspect an entity? [Y/N]\n";
-    if (getFromUserChar("YN", 2) == 'Y') {
+    if (getFromUserChar("YN") == 'Y') {
         cout << "Enter entity ID: ";
         int id = getFromUserNum();
         int index = findID(id, world);
         if (index >= 0) {
-            world[index]->getAction();
+            world[index]->getStats();
             living* person = dynamic_cast<living*>(world[index]);
             if (person)
                 cout << "Health: " << person->getHealthLevel()
@@ -84,25 +85,23 @@ void UI::printCreationOptions(vector<simEntity*>& world, UndoManager& undo) {
 
 void UI::createEntity(vector<simEntity*>& world, UndoManager& undo) {
     cout << "\nCreate: Survivor[S], Animal[A], Build[B], Cancel[C]\n";
-    char group = getFromUserChar("SABC", 4);
+    char group = getFromUserChar("SABC");
     if (group == 'C') {return;}
 
     string name;
 
     cout << "\nDefault[D], Custom[C]\n";
-    char choice = getFromUserChar("DC", 2);
+    char choice = getFromUserChar("DC");
 
     if(choice == 'C'){
         cout << "Enter a name (one line): ";
         getline(cin, name);
     }
 
-
-
     simEntity* created = nullptr;
     if (group == 'S') {
         cout << "Regular[R], Doctor[D], Scout[S], Farmer[F], Engineer[E], Hunter[H]\n";
-        char type = getFromUserChar("RDSFEH", 6);
+        char type = getFromUserChar("RDSFEH");
         if (type == 'R' and choice == 'C') created = new survivor(name);
         else if (type == 'D' and choice == 'C') created = new doctor(name);
         else if (type == 'S' and choice == 'C') created = new scout(name);
@@ -117,7 +116,7 @@ void UI::createEntity(vector<simEntity*>& world, UndoManager& undo) {
         else if (type == 'H' and choice == 'D') created = new hunter();
     } else if (group == 'A') {
         cout << "Rabbit[R], Goat[G], Pig[P]\n";
-        char type = getFromUserChar("RGP", 3);
+        char type = getFromUserChar("RGP");
         if (type == 'R' and choice == 'C') created = new rabbit(name);
         else if (type == 'G' and choice == 'C') created = new goat(name);
         else if (type == 'P' and choice == 'C') created = new pig(name);
@@ -126,7 +125,7 @@ void UI::createEntity(vector<simEntity*>& world, UndoManager& undo) {
         else if (type == 'P' and choice == 'D') created = new pig();
     } else {
         cout << "Hut[H], Fence[F], Storage[S], Farm[R], Animal pen[P]\n";
-        char type = getFromUserChar("HFSRP", 5);
+        char type = getFromUserChar("HFSRP");
         if (type == 'H' and choice == 'C') created = new hut(name);
         else if (type == 'F' and choice == 'C') created = new fence(name);
         else if (type == 'S' and choice == 'C') created = new storage(name);
@@ -179,7 +178,7 @@ void UI::interactWithEntity(vector<simEntity*>& world, UndoManager& undo, EventM
     if (index < 0) return;
     simEntity* entity = world[index];
     cout << "Rename[N], Toggle active[A], Special ability[S], Queue event[E], Cancel[C]\n";
-    char choice = getFromUserChar("NASEC", 5);
+    char choice = getFromUserChar("NASEC");
     if (choice == 'C') return;
     if (choice == 'N') {
         undo.recordModified(index, entity);
@@ -192,7 +191,7 @@ void UI::interactWithEntity(vector<simEntity*>& world, UndoManager& undo, EventM
         cout << "Entity is now " << (entity->getisActive() ? "active" : "inactive") << ".\n";
     } else if (choice == 'E') {
         cout << "Damage[D], Heal[H], Deactivate[X]\n";
-        char eventType = getFromUserChar("DHX", 3);
+        char eventType = getFromUserChar("DHX");
         string type, description;
         int amount = 0;
         if (eventType == 'D') { type = "damage"; description = "Damage target"; amount = getFromUserNum(); }
@@ -212,7 +211,7 @@ void UI::interactWithEntity(vector<simEntity*>& world, UndoManager& undo, EventM
 
         if (d) {
             cout << "Make medicine[M] or heal another survivor[H]?\n";
-            char action = getFromUserChar("MH", 2);
+            char action = getFromUserChar("MH");
             undo.recordModified(index, entity);
             if (action == 'M') d->makeMeds();
             else {
@@ -227,12 +226,12 @@ void UI::interactWithEntity(vector<simEntity*>& world, UndoManager& undo, EventM
         } else if (sc) { undo.recordModified(index, entity); sc->gatherResources(); cout << "Resources gathered; XP increased.\n"; }
         else if (en) {
             cout << "Build action[B] or repair action[R]?\n";
-            char action = getFromUserChar("BR", 2);
+            char action = getFromUserChar("BR");
             undo.recordModified(index, entity);
             if (action == 'B') en->build(); else en->repair();
         } else if (f) {
             cout << "Breed[B] or grow crops[G]?\n";
-            char action = getFromUserChar("BG", 2);
+            char action = getFromUserChar("BG");
             undo.recordModified(index, entity);
             if (action == 'B') f->breed(); else f->growCrops();
         } else if (h) {
@@ -242,7 +241,7 @@ void UI::interactWithEntity(vector<simEntity*>& world, UndoManager& undo, EventM
         } else if (a) a->dropResources();
         else if (s) cout << "This survivor has no special ability. Its action is shown below:\n";
         else cout << "This entity has no special ability.\n";
-        if (s) s->getAction();
+        if (s) s->getStats();
     }
 }
 

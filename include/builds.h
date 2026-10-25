@@ -1,8 +1,4 @@
 #pragma once // To solve the issue of multiple includes
-
-#include <iostream>
-#include <string>
-#include <vector>
 #include "include/base.h"
 
 using namespace std;
@@ -29,7 +25,7 @@ private:
         void setMaxBeds(int); 
         
 
-        void getAction() const override;
+        void getStats() const override;
         simEntity* clone() const override;
 };
 
@@ -42,7 +38,7 @@ class fence: public builds{
         fence(const fence &c);
         ~fence() override;
 
-        void getAction() const override;
+        void getStats() const override;
         simEntity* clone() const override;
 };
 
@@ -55,7 +51,7 @@ class farm: public builds{
         farm(const farm &c);
         ~farm() override;
 
-        void getAction() const override;
+        void getStats() const override;
         simEntity* clone() const override;
 };
 
@@ -83,7 +79,7 @@ class storage: public builds{
         void setMaxStorageSpace(int);
         int getMaxStorageSpace() const;
 
-        void getAction() const override;
+        void getStats() const override;
         simEntity* clone() const override;
 };
 
@@ -111,6 +107,6 @@ class animalPen: public builds{
         void setMaxAnimalsInPen(int);
         int getMaxAnimalsInPen() const;
 
-        void getAction() const override;
+        void getStats() const override;
         simEntity* clone() const override;
 };

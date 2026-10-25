@@ -38,7 +38,7 @@ int hut::getMaxBeds() const{
 
 void hut::setMaxBeds(int beds) { maxBeds = beds; }
 
-void hut::getAction() const {
+void hut::getStats() const {
     cout << "The hut provides shelter and a place to rest." << endl;
 }
 
@@ -63,7 +63,7 @@ fence::~fence() {
     cout << "Fence destroyed" << endl;
 }
 
-void fence::getAction() const {
+void fence::getStats() const {
     cout << "The fence protects the survivors' camp." << endl;
 }
 
@@ -89,7 +89,7 @@ farm::~farm() {
     cout << "Farm destroyed" << endl;
 }
 
-void farm::getAction() const {
+void farm::getStats() const {
     cout << "The farm is used to grow crops." << endl;
 }
 
@@ -172,7 +172,7 @@ item storage::getFromStorage(item I){
     }
 }
 
-void storage::getAction() const {
+void storage::getStats() const {
     cout << "The storage keeps the island's resources safe." << endl;
 }
 
@@ -258,7 +258,7 @@ int animalPen::findAnimalInPen(living* animal){
 // }
 
 
-void animalPen::getAction() const {
+void animalPen::getStats() const {
     cout << "The animal pen provides a place for animals to live." << endl;
 }
 

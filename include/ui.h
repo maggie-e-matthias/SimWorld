@@ -16,7 +16,7 @@ using namespace std;
 // UI handles validated input and user-facing operations on the world.
 class UI {
 public:
-    char getFromUserChar(string bounds, int size);
+    char getFromUserChar(string bounds);
     int getFromUserNum();
     void printTurnStats(const vector<simEntity*>& world);
     void printCreationOptions(vector<simEntity*>& world, UndoManager& undo);

@@ -30,7 +30,6 @@ private:
     int ID;
     string* name;
     bool isActive;
-    int daysItLasted; // Um?
 
 public:
     simEntity(string name = "NPC", bool isActive = true);
@@ -44,10 +43,7 @@ public:
     bool getisActive() const;
     void setActive(bool active);
 
-    int getDaysLasted() const;
-    void setDaysLasted(int days);
-
-    virtual void getAction() const = 0;
+    virtual void getStats() const = 0;
     virtual simEntity* clone() const = 0;
 
     // Used when undoing a deletion or modification

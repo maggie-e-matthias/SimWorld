@@ -26,6 +26,11 @@ public:
     int getAmount() const;
     string getDescription() const;
     void display() const;
+    void doDeactivate(simEntity* target, int& targetIndex, UndoManager& undo);
+    void doDamage(simEntity* target, Event& current, int& targetIndex, UndoManager& undo);
+    void doHeal(simEntity* target, Event& current, int& targetIndex, UndoManager& undo);
+    void RandomEvent(simEntity* target, Event& current, int& targetIndex, UndoManager& undo);
+
 };
 
 class EventManager {
@@ -36,4 +41,5 @@ public:
     void viewEvents() const;
     void processEvents(vector<simEntity*>& world, UndoManager& undo);
     bool hasEvents() const;
+    
 };

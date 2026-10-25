@@ -53,6 +53,53 @@ void EventManager::viewEvents() const {
     }
 }
 
+void doDamage(simEntity* target, Event& current, int& targetIndex, UndoManager& undo){
+    living* person = dynamic_cast<living*>(target);
+        if (person) {
+            undo.recordModified(targetIndex, target);
+            int health = person->getHealthLevel() - current.getAmount();
+            if (health < 0) health = 0;
+            person->setHealthLevel(health);
+            cout << "Damage event processed for ID " << target->getID() << ".\n";
+        } 
+        else 
+            cout << "Damage event needs a living target.\n";
+}
+
+void doHeal(simEntity* target, Event& current, int& targetIndex, UndoManager& undo){
+    living* person = dynamic_cast<living*>(target);
+            
+    if (person) {
+            undo.recordModified(targetIndex, target);
+            int health = person->getHealthLevel() + current.getAmount();
+            if (health > person->getMaxHealthLevel()) health = person->getMaxHealthLevel();
+            person->setHealthLevel(health);
+            cout << "Heal event processed for ID " << target->getID() << ".\n";
+        } 
+    else 
+        cout << "Heal event needs a living target.\n";
+}
+
+void doDeactivate(simEntity* target, int& targetIndex, UndoManager& undo){
+    undo.recordModified(targetIndex, target);
+    target->setActive(false);
+    cout << "Entity deactivated.\n";
+}
+
+void RandomEvent(simEntity* target, Event& current, int& targetIndex, UndoManager& undo){
+    if(rand()%2){
+        int ran = rand() % 2;
+        if(ran){
+            cout << "You stepped on a spike \n";
+            doDamage(target, current, targetIndex, undo);
+        }
+        else{
+            cout << "A healer magicly appear and decided to give you a boost for your hard work";
+            doHeal(target, current, targetIndex, undo);
+        }
+    }
+}
+
 void EventManager::processEvents(vector<simEntity*>& world, UndoManager& undo) {
     Event current;
 
@@ -68,62 +115,28 @@ void EventManager::processEvents(vector<simEntity*>& world, UndoManager& undo) {
                 break;
             }
         }
-
         if (!target) {
             cout << "Event " << current.getEventID()
                  << " skipped: target no longer exists.\n";
-        }
+        } 
         else if (current.getType() == "damage") {
-            living* person = dynamic_cast<living*>(target);
-
-            if (person) {
-                undo.recordModified(targetIndex, target);
-
-                int health = person->getHealthLevel() - current.getAmount();
-                if (health < 0) health = 0;
-
-                person->setHealthLevel(health);
-
-                cout << "Damage event processed for ID "
-                     << target->getID() << ".\n";
-            }
-            else {
-                cout << "Damage event needs a living target.\n";
-            }
-        }
+            doDamage(target, current, targetIndex, undo);
+            
+            RandomEvent(target, current, targetIndex, undo);
+        } 
         else if (current.getType() == "heal") {
-            living* person = dynamic_cast<living*>(target);
-
-            if (person) {
-                undo.recordModified(targetIndex, target);
-
-                int health = person->getHealthLevel() + current.getAmount();
-
-                if (health > person->getMaxHealthLevel()) {
-                    health = person->getMaxHealthLevel();
-                }
-
-                person->setHealthLevel(health);
-
-                cout << "Heal event processed for ID "
-                     << target->getID() << ".\n";
-            }
-            else {
-                cout << "Heal event needs a living target.\n";
-            }
-        }
+            doHeal(target,current,targetIndex, undo);
+            
+            RandomEvent(target, current, targetIndex, undo);
+        } 
         else if (current.getType() == "deactivate") {
-            undo.recordModified(targetIndex, target);
-            target->setActive(false);
+            doDeactivate(target, targetIndex, undo);
+            
+            RandomEvent(target, current, targetIndex, undo);
+        } 
+        else 
+            cout << "Unknown event type: " << current.getType() << '\n';
 
-            cout << "Entity deactivated.\n";
-        }
-        else {
-            cout << "Unknown event type: "
-                 << current.getType() << '\n';
-        }
-
-        // Remove the event after processing it
         events.dequeue();
     }
 }

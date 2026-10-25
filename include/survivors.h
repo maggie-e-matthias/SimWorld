@@ -1,9 +1,6 @@
 
 #pragma once
 
-#include <iostream>
-#include <string>
-#include <vector>
 #include "base.h"
 
 using namespace std;
@@ -34,7 +31,7 @@ public:
 
     void transferItem(item I, simEntity* target);
 
-    void getAction() const override;
+    void getStats() const override;
     simEntity* clone() const override;
 };
 
@@ -48,7 +45,7 @@ public:
     void heal(survivor& s);
     void makeMeds();
 
-    void getAction() const override;
+    void getStats() const override;
     simEntity* clone() const override;
 };
 
@@ -61,7 +58,7 @@ public:
 
     void gatherResources();
 
-    void getAction() const override;
+    void getStats() const override;
     simEntity* clone() const override;
 };
 
@@ -75,7 +72,7 @@ public:
     void build();
     void repair();
 
-    void getAction() const override;
+    void getStats() const override;
     simEntity* clone() const override;
 };
 
@@ -89,7 +86,7 @@ public:
     void breed();
     void growCrops();
 
-    void getAction() const override; 
+    void getStats() const override; 
     simEntity* clone() const override;
 };
 
@@ -103,6 +100,6 @@ public:
     void hunt();
     void fendOff();
 
-    void getAction() const override; 
+    void getStats() const override; 
     simEntity* clone() const override;
 };

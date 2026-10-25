@@ -4,7 +4,8 @@ using namespace std;
 
 // ANIMAL 
 
-animal::animal(string name, bool isActive, vector<item> resources) : living(name, isActive), resources(resources) {
+animal::animal(string name, bool isActive, vector<item> resources, int healthLevel, int maxHealthLevel, int hungerLevel, int maxHungerLevel) : 
+living(name, isActive, healthLevel, maxHealthLevel, hungerLevel, maxHungerLevel), resources(resources) {
 }
 
 animal::animal(const animal& c) : living(c), resources(c.resources) {
@@ -26,8 +27,11 @@ rabbit::~rabbit() {
     cout << "Rabbit Died" << endl;
 }
 
-void rabbit::getAction() const {
-    cout << "The rabbit is moving around the island." << endl;
+void rabbit::getStats() const {
+    cout << "Name: " << *(this->getName()) << endl;
+    cout << "ID: " << this->getID() << endl;
+    cout << "Health Level: " << this->getHealthLevel() << endl;
+    cout << "Hunger Level: " << this ->getHungerLevel() << endl;
 }
 
 void rabbit::dropResources() {
@@ -61,8 +65,11 @@ goat::~goat() {
     cout << "Goat Died" << endl;
 }
 
-void goat::getAction() const{
-    cout << "The goat is grazing on the island." << endl;
+void goat::getStats() const{
+    cout << "Name: " << *(this->getName()) << endl;
+    cout << "ID: " << this->getID() << endl;
+    cout << "Health Level: " << this->getHealthLevel() << endl;
+    cout << "Hunger Level: " << this ->getHungerLevel() << endl;
 }
 
 void goat::dropResources() {
@@ -96,8 +103,11 @@ pig::~pig() {
     cout << "Pig Died" << endl;
 }
 
-void pig::getAction() const {
-    cout << "The pig is searching for food on the island." << endl;
+void pig::getStats() const {
+    cout << "Name: " << *(this->getName()) << endl;
+    cout << "ID: " << this->getID() << endl;
+    cout << "Health Level: " << this->getHealthLevel() << endl;
+    cout << "Hunger Level: " << this ->getHungerLevel() << endl;
 }
 
 void pig::dropResources() {

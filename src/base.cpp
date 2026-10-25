@@ -11,13 +11,13 @@
 
 int simEntity::count = 0;
 
-simEntity::simEntity(string name, bool isActive): isActive(isActive), daysItLasted(0) {
+simEntity::simEntity(string name, bool isActive): isActive(isActive) {
     count++;
     ID = count;
     this->name = new string(name);
 }
 
-simEntity::simEntity(const simEntity &c): isActive(c.isActive), daysItLasted(c.daysItLasted) {
+simEntity::simEntity(const simEntity &c): isActive(c.isActive) {
     count++;
     ID = count;
     name = new string(*c.name);
@@ -50,13 +50,6 @@ void simEntity::setActive(bool isActive) {
     this->isActive = isActive;
 }
 
-int simEntity::getDaysLasted() const {
-    return daysItLasted;
-}
-
-void simEntity::setDaysLasted(int days) {
-    this->daysItLasted = days;
-}
 
 void simEntity::setIDForUndo(int id) {
     ID = id;

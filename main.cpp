@@ -94,7 +94,7 @@ int main() {
 
     cout << "------ Survivor Island Simulator ------\n";
     cout << "Start[S] or Quit[Q]\n";
-    if (ui.getFromUserChar("SQ", 2) == 'Q') gameOn = false;
+    if (ui.getFromUserChar("SQ") == 'Q') gameOn = false;
 
     while (gameOn) {
         day++;
@@ -106,21 +106,21 @@ int main() {
             cout << "\n----- Turn " << turn << " -----\n";
             ui.printTurnStats(world);
 
-           // Every active entity performs its type-specific action through
-// the same virtual function, without checking its concrete type.
-cout << "\nActive entities take their actions:\n";
+        // Every active entity performs its type-specific action through
+        // the same virtual function, without checking its concrete type.
+        cout << "\nActive entities take their actions:\n";
 
-for (simEntity* entity : world)
-{
-    if (entity != nullptr && entity->getisActive())
-    {
-        entity->getAction();
-    }
-}
+        for (simEntity* entity : world)
+        {
+            if (entity != nullptr && entity->getisActive())
+            {
+                entity->getStats();
+            }
+        }
 
             cout << "\nCreate[N] Duplicate[D] Delete[R] Interact[I] Undo[U]\n";
             cout << "View pending events[V] Process events[P] End turn[T]\n";
-            char choice = ui.getFromUserChar("NDRIUVPT", 8);
+            char choice = ui.getFromUserChar("NDRIUVPT");
 
             switch (choice) {
                 case 'N': ui.printCreationOptions(world, undo); break;
@@ -133,10 +133,10 @@ for (simEntity* entity : world)
                 case 'T': break;
             }
         }
-
+        
         ui.printDailyStats(world);
         cout << "\nContinue to the next day? [Y/N]\n";
-        if (ui.getFromUserChar("YN", 2) == 'N') gameOn = false;
+        if (ui.getFromUserChar("YN") == 'N') gameOn = false;
     }
 
     // Delete each world-owned entity exactly once before exiting.
