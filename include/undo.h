@@ -3,7 +3,7 @@
 
 #include <iostream>
 #include "base.h"
-#include "stack.h"
+#include "Stack.h"
 
 using namespace std;
 
@@ -40,5 +40,5 @@ public:
     void recordDeleted(int index, simEntity* entity);
     void recordModified(int index, simEntity* entity);
 
-    bool undo(simEntity* entities[], int& count);
+    bool undo(vector<simEntity*>& entities);
 };

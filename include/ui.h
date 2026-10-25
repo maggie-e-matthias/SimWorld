@@ -1,40 +1,30 @@
+#pragma once
 #include <iostream>
-#include <string> 
-#include <ctime>
+#include <string>
 #include <iomanip>
+#include <limits>
 #include <cctype>
-using namespace std;
-
+#include <vector>
 #include "survivors.h"
 #include "builds.h"
 #include "animals.h"
+#include "undo.h"
+#include "event.h"
 
+using namespace std;
 
-// UI class is a mediator class here that handles large menues, validates input properly, and interacts directly with 
-// the backend of the simulation, most complex functionalities have been implemented here for ease of use in the main loop
-// and to handle interaction with the 'world' and its entities
-
-class UI{
-    public:
-        // Basic in every other method
-        char getFromUserChar(string, int); // Validates char input and makes sure its within bounds
-        int getFromUserNum();
-
-        // Per Turn Options
-        void printTurnStats(vector<simEntity*>);
-        void printCreationOptions();
-        void printInteractionOptions(); 
-
-        // Utility functions
-        int findID(int, vector<simEntity*>);
-        //Acess to classes functions
-
-        void createEntity(vector<simEntity*>);
-        void duplicateEntity(vector<simEntity*>);
-        void deleteEntity(vector<simEntity*>);
-        void interactWithEntity(vector<simEntity*>);
-
-        // End of each SimDay stats
-        void printDailyStats(vector<simEntity*>);
-
+// UI handles validated input and user-facing operations on the world.
+class UI {
+public:
+    char getFromUserChar(string bounds, int size);
+    int getFromUserNum();
+    void printTurnStats(const vector<simEntity*>& world);
+    void printCreationOptions(vector<simEntity*>& world, UndoManager& undo);
+    void printInteractionOptions(vector<simEntity*>& world, UndoManager& undo, EventManager& events);
+    int findID(int targetID, const vector<simEntity*>& world);
+    void createEntity(vector<simEntity*>& world, UndoManager& undo);
+    void duplicateEntity(vector<simEntity*>& world, UndoManager& undo);
+    void deleteEntity(vector<simEntity*>& world, UndoManager& undo);
+    void interactWithEntity(vector<simEntity*>& world, UndoManager& undo, EventManager& events);
+    void printDailyStats(const vector<simEntity*>& world);
 };

@@ -36,6 +36,8 @@ int hut::getMaxBeds() const{
     return maxBeds;
 }
 
+void hut::setMaxBeds(int beds) { maxBeds = beds; }
+
 void hut::getAction() const {
     cout << "The hut provides shelter and a place to rest." << endl;
 }
@@ -114,6 +116,10 @@ storage::~storage() {
 }
 
 
+void storage::setMaxStorageSpace(int size) { if (size >= 0) maxStorageSpace = size; }
+
+int storage::getMaxStorageSpace() const { return maxStorageSpace; }
+
 void storage::addToStorage(item I){
     if(storageSpaces.size() == maxStorageSpace){ // Has to check if it's full
         cout << "Sorry, " << this->getName() << "'s storage is full" << endl;
@@ -178,15 +184,20 @@ simEntity* storage::clone() const {
 // Animal Pen
 
 animalPen::animalPen(string name, bool isActive, int durability, int maxDurability): 
-builds(name, isActive, durability, maxDurability, {item::WOOD, item::STONE, item::LEATHER}, item::STONE, {"animal shelter", "breeding area"}) {
+builds(name, isActive, durability, maxDurability, {item::WOOD, item::STONE, item::LEATHER}, item::STONE, {"animal shelter", "breeding area"}), maxAnimalsInPen(10) {
     cout << "Animal Pen created" << endl;
 }
 
-animalPen::animalPen(const animalPen &c): builds(c) {
+animalPen::animalPen(const animalPen &c): builds(c), maxAnimalsInPen(c.maxAnimalsInPen) {
+    for (living* animal : c.animalsInPen) {
+        if (animal) animalsInPen.push_back(dynamic_cast<living*>(animal->clone()));
+    }
     cout << "Animal Pen created" << endl;
 }
 
 animalPen::~animalPen() {
+    for (living* animal : animalsInPen) delete animal;
+    animalsInPen.clear();
     cout << "Animal Pen destroyed" << endl;
 }
 
@@ -195,10 +206,14 @@ void animalPen::addAnimalToPen(living* animal){
         cout << "Sorry, " << this->getName() << "'s storage is full" << endl;
     }
     else{
-        this->animalsInPen.push_back(animal);
+        this->animalsInPen.push_back(animal ? dynamic_cast<living*>(animal->clone()) : nullptr);
     }   
 }
 
+
+void animalPen::setMaxAnimalsInPen(int amount) { if (amount >= 0) maxAnimalsInPen = amount; }
+
+int animalPen::getMaxAnimalsInPen() const { return maxAnimalsInPen; }
 
 bool animalPen::isPenEmpty() const{
     return animalsInPen.empty();

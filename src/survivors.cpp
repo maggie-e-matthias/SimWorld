@@ -126,7 +126,7 @@ void doctor::heal(survivor &s) {
         }  
     }
     else{
-        cout << s.getName() << " is already at full health!" << endl;
+        cout << *s.getName() << " is already at full health!" << endl;
     }
 
 
@@ -263,7 +263,7 @@ void hunter::hunt() {
 void hunter::fendOff() {
     // Starts a fending off process which should take some time
     // Ends the 'attack event' after 'some time', loses health in the process
-    setHealthLevel(getHealthLevel() - 5); 
+    setHealthLevel(getHealthLevel() > 5 ? getHealthLevel() - 5 : 0); 
     setXPLevel(getXPLevel() + 15);
 }
 

@@ -130,7 +130,7 @@ builds::builds(string name, bool isActive,int durability, int maxDurability, vec
 }
 
 builds::builds(const builds &c): simEntity(c), durability(c.durability), maxDurability(c.maxDurability), upgradeLevel(c.upgradeLevel),
-    buildRequirements(c.buildRequirements), upgradeRequirements(c.upgradeRequirements) {
+    buildRequirements(c.buildRequirements), upgradeRequirements(c.upgradeRequirements), features(c.features) {
     cout << "Build entity created" << endl;
 }
 

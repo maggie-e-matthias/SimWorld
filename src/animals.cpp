@@ -4,10 +4,10 @@ using namespace std;
 
 // ANIMAL 
 
-animal::animal(string name, bool isActive, vector<item> resources) : living(name, isActive) {
+animal::animal(string name, bool isActive, vector<item> resources) : living(name, isActive), resources(resources) {
 }
 
-animal::animal(const animal& c) : living(c) {
+animal::animal(const animal& c) : living(c), resources(c.resources) {
 }
 
 animal::~animal() {
@@ -15,7 +15,7 @@ animal::~animal() {
 
 //  RABBIT
 
-rabbit::rabbit(string name, bool isActive): animal(name, isActive, {item::MEAT, item::LEATHER}){
+rabbit::rabbit(string name, bool isActive): animal(name, isActive, {item::MEAT, item::LEATHER}), resources({"meat", "fur"}){
     cout << "Rabbit Spawned" << endl;
 }
 
@@ -50,7 +50,7 @@ simEntity* rabbit::clone() const {
 
 
 // GOAT 
-goat::goat(string name, bool isActive):animal(name, isActive, {item::MEAT, item::MILK, item::LEATHER}){
+goat::goat(string name, bool isActive):animal(name, isActive, {item::MEAT, item::MILK, item::LEATHER}), resources({"meat", "milk", "leather"}){
     cout << "Goat Spawned" << endl;
 }
 
@@ -85,7 +85,7 @@ simEntity* goat::clone() const {
 
 // PIG 
 
-pig::pig(string name, bool isActive):animal(name, isActive, {item::MEAT, item::MEAT, item::LEATHER}){
+pig::pig(string name, bool isActive):animal(name, isActive, {item::MEAT, item::MEAT, item::LEATHER}), resources({"meat", "meat", "leather"}){
     cout << "Pig Spawned" << endl;
 }
 
