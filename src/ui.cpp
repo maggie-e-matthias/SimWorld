@@ -85,7 +85,7 @@ void UI::printCreationOptions(vector<simEntity*>& world, UndoManager& undo) {
 void UI::createEntity(vector<simEntity*>& world, UndoManager& undo) {
     cout << "\nCreate: Survivor[S], Animal[A], Build[B], Cancel[C]\n";
     char group = getFromUserChar("SABC", 4);
-    if (group == 'C') return;
+    if (group == 'C') {return;}
 
     string name;
 

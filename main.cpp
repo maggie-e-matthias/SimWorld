@@ -106,12 +106,17 @@ int main() {
             cout << "\n----- Turn " << turn << " -----\n";
             ui.printTurnStats(world);
 
-            // Every active entity performs its type-specific action through
-            // the same virtual function, without checking its concrete type.
-            cout << "\nActive entities take their actions:\n";
-            for (simEntity* entity : world) {
-                if (entity && entity->getisActive()) entity->getAction();
-            }
+           // Every active entity performs its type-specific action through
+// the same virtual function, without checking its concrete type.
+cout << "\nActive entities take their actions:\n";
+
+for (simEntity* entity : world)
+{
+    if (entity != nullptr && entity->getisActive())
+    {
+        entity->getAction();
+    }
+}
 
             cout << "\nCreate[N] Duplicate[D] Delete[R] Interact[I] Undo[U]\n";
             cout << "View pending events[V] Process events[P] End turn[T]\n";
